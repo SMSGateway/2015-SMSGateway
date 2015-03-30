@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_alignParentTop="true"
+    android:background="@color/smap_dark_grey" >
+
+    <TextView
+        android:id="@+id/txt_distribution_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:paddingLeft="12dp"
+        android:paddingTop="12dp"
+        android:singleLine="true"
+        android:text="APRIL SURVEY"
+        android:textColor="@color/smap_cream"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txt_member_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_distribution_name"
+        android:inputType="textCapCharacters"
+        android:paddingLeft="12dp"
+        android:paddingTop="2dp"
+        android:text="6 ACTIVE / 3 SILENT"
+        android:textColor="@color/smap_cream"
+   
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/txt_completed_progress"
+        style="@style/DarkGreyFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/txt_distribution_name"
+        android:paddingRight="12dp"
+        android:paddingTop="12dp"
+        android:text="17/26"
+        android:textColor="@color/smap_cream"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/view_progress_bg"
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:layout_above="@+id/view_seperator"
+        android:background="@color/smap_blue" />
+
+    <View
+        android:id="@+id/view_progress"
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:layout_above="@+id/view_seperator"
+        android:background="@color/smap_light_green" />
+
+    <View
+        android:id="@+id/view_seperator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/smap_dark_grey" />
+
+</RelativeLayout>

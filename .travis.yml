@@ -1,0 +1,16 @@
+language: android
+
+env:
+  matrix:
+  - ANDROID_TARGET=android-19  ANDROID_ABI=armeabi-v7a
+
+android:
+  components:
+  - build-tools-20.0.0
+
+script: ./gradlew build
+
+notifications:
+  hipchat:
+    rooms:
+      secure: e/Az18QMknrc6ixk+HZB5djFBzDNjXERE8pEZfoNY1ZN0VFJYf+HFw/XyOcLin3kRVASvhK5XsH6L4ih18YL8nhHONCEyvkoJieDvMVf7OeUnVizSL3hq3uY3TesE42av6H4M9oteaRHjLjWjaFBBOJCAdP4pVyQmHG8CPTSWcM=

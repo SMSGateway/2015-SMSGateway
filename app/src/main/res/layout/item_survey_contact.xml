@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:background="@color/smap_light_grey"
+    android:paddingBottom="12dp" >
+
+    <TextView
+        android:id="@+id/txt_name"
+        style="@style/DarkGreyFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:paddingLeft="24dp"
+        android:paddingTop="10dp"
+        android:singleLine="true"
+        android:text="MATT WITHEROW"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/slidedots" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/slidedots" />
+
+    <TextView
+        android:id="@+id/txt_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_name"
+        android:paddingBottom="1dp"
+        android:paddingLeft="24dp"
+        android:paddingTop="1dp"
+        android:text="0473 234 543"
+        android:textColor="@color/smap_dark_grey"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/txt_completed_progress"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/txt_number"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/smap_light_green"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="@color/smap_cream"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_completed_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/txt_completed_progress"
+        android:layout_alignStart="@+id/txt_completed_progress"
+        android:layout_below="@id/txt_completed_progress"
+        android:gravity="center_horizontal"
+        android:paddingTop="1dp"
+        android:singleLine="true"
+        android:text="OF 12"
+        android:textColor="@color/smap_dark_grey"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/txt_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/txt_number"
+        android:inputType="textCapCharacters"
+        android:paddingLeft="24dp"
+        android:text="Last Activity: 24/03, 1:00pm"
+        android:textColor="@android:color/black"
+        android:textSize="10dp" />
+
+</RelativeLayout>

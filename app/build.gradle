@@ -1,0 +1,38 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        applicationId "com.android.smap"
+        minSdkVersion 14
+        targetSdkVersion 19
+    }
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
+    // don't fail the build if linting fails
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.google.guava:guava:17.0'
+    compile 'com.android.support:appcompat-v7:20.0.0'
+    compile 'com.android.support:support-v13:20.0.0'
+    compile 'com.google.inject:guice:2.0-no_aop'
+    compile 'javax.inject:javax.inject:1'
+    compile 'net.sf.kxml:kxml2:2.3.0'
+    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
+    compile files('libs/ActiveAndroid.jar')
+    compile files('libs/javarosa-libraries-2014-04-29.jar')
+    compile files('libs/smap-survey-manager-0.2.4.jar')
+}

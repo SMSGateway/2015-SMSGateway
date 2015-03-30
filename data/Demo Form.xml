@@ -1,0 +1,171 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+  <h:head>
+    <h:title>Demo Form</h:title>
+    <model>
+      <instance>
+        <data id="build_Demo-Form_1404356715">
+          <meta>
+            <instanceID/>
+          </meta>
+          <DemoTextField/>
+          <DemoNumberField/>
+          <DemoDateField/>
+          <DemoLocationField/>
+          <DemoMediaField/>
+          <DemoBarcodeField/>
+          <DemoChooseField/>
+          <DemoSelectMultiField/>
+          <DemoMetadataDeviceID/>
+          <DemoMetadataStartTime/>
+          <DemoMetadataEndTime/>
+          <DemoGroupField>
+            <DemoGroupedText1/>
+            <DemoGroupedText2/>
+          </DemoGroupField>
+        </data>
+      </instance>
+      <itext>
+        <translation lang="eng">
+          <text id="/data/DemoTextField:label">
+            <value>Demo Text Field</value>
+          </text>
+          <text id="/data/DemoTextField:hint">
+            <value>enter some text</value>
+          </text>
+          <text id="/data/DemoNumberField:label">
+            <value>Demo Number Field</value>
+          </text>
+          <text id="/data/DemoNumberField:hint">
+            <value>enter a number</value>
+          </text>
+          <text id="/data/DemoDateField:label">
+            <value>Demo Date Field</value>
+          </text>
+          <text id="/data/DemoDateField:hint">
+            <value>enter a date</value>
+          </text>
+          <text id="/data/DemoLocationField:label">
+            <value>Demo Location Field</value>
+          </text>
+          <text id="/data/DemoLocationField:hint">
+            <value>enter a location</value>
+          </text>
+          <text id="/data/DemoMediaField:label">
+            <value>Demo Media Field</value>
+          </text>
+          <text id="/data/DemoBarcodeField:label">
+            <value>Demo Barcode Field</value>
+          </text>
+          <text id="/data/DemoBarcodeField:hint">
+            <value>enter barcode</value>
+          </text>
+          <text id="/data/DemoChooseField:label">
+            <value>Demo Choose Field</value>
+          </text>
+          <text id="/data/DemoChooseField:hint">
+            <value>select an option</value>
+          </text>
+          <text id="/data/DemoChooseField:option0">
+            <value>Option one</value>
+          </text>
+          <text id="/data/DemoChooseField:option1">
+            <value>Option two</value>
+          </text>
+          <text id="/data/DemoSelectMultiField:label">
+            <value>Demo Select Multi Field</value>
+          </text>
+          <text id="/data/DemoSelectMultiField:hint">
+            <value>select multiple</value>
+          </text>
+          <text id="/data/DemoSelectMultiField:option0">
+            <value>option 1</value>
+          </text>
+          <text id="/data/DemoSelectMultiField:option1">
+            <value>option 2</value>
+          </text>
+          <text id="/data/DemoGroupField:label">
+            <value>Demo Group Field</value>
+          </text>
+          <text id="/data/DemoGroupField/DemoGroupedText1:label">
+            <value>Demo Grouped Text 1</value>
+          </text>
+          <text id="/data/DemoGroupField/DemoGroupedText2:label">
+            <value>Demo Grouped Text 2</value>
+          </text>
+        </translation>
+      </itext>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
+      <bind nodeset="/data/DemoTextField" type="string"/>
+      <bind nodeset="/data/DemoNumberField" type="int"/>
+      <bind nodeset="/data/DemoDateField" type="date"/>
+      <bind nodeset="/data/DemoLocationField" type="geopoint"/>
+      <bind nodeset="/data/DemoMediaField" type="binary"/>
+      <bind nodeset="/data/DemoBarcodeField" type="barcode"/>
+      <bind nodeset="/data/DemoChooseField" type="select1"/>
+      <bind nodeset="/data/DemoSelectMultiField" type="select"/>
+      <bind nodeset="/data/DemoMetadataDeviceID" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
+      <bind nodeset="/data/DemoMetadataStartTime" type="dateTime" jr:preload="timestamp" jr:preloadParams="start"/>
+      <bind nodeset="/data/DemoMetadataEndTime" type="dateTime" jr:preload="timestamp" jr:preloadParams="end"/>
+      <bind nodeset="/data/DemoGroupField/DemoGroupedText1" type="string"/>
+      <bind nodeset="/data/DemoGroupField/DemoGroupedText2" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/data/DemoTextField">
+      <label ref="jr:itext('/data/DemoTextField:label')"/>
+      <hint ref="jr:itext('/data/DemoTextField:hint')"/>
+    </input>
+    <input ref="/data/DemoNumberField">
+      <label ref="jr:itext('/data/DemoNumberField:label')"/>
+      <hint ref="jr:itext('/data/DemoNumberField:hint')"/>
+    </input>
+    <input ref="/data/DemoDateField">
+      <label ref="jr:itext('/data/DemoDateField:label')"/>
+      <hint ref="jr:itext('/data/DemoDateField:hint')"/>
+    </input>
+    <input ref="/data/DemoLocationField">
+      <label ref="jr:itext('/data/DemoLocationField:label')"/>
+      <hint ref="jr:itext('/data/DemoLocationField:hint')"/>
+    </input>
+    <upload ref="/data/DemoMediaField" mediatype="image/*">
+      <label ref="jr:itext('/data/DemoMediaField:label')"/>
+    </upload>
+    <input ref="/data/DemoBarcodeField">
+      <label ref="jr:itext('/data/DemoBarcodeField:label')"/>
+      <hint ref="jr:itext('/data/DemoBarcodeField:hint')"/>
+    </input>
+    <select1 ref="/data/DemoChooseField">
+      <label ref="jr:itext('/data/DemoChooseField:label')"/>
+      <hint ref="jr:itext('/data/DemoChooseField:hint')"/>
+      <item>
+        <label ref="jr:itext('/data/DemoChooseField:option0')"/>
+        <value>option 1 val</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/data/DemoChooseField:option1')"/>
+        <value>option 2 val</value>
+      </item>
+    </select1>
+    <select ref="/data/DemoSelectMultiField">
+      <label ref="jr:itext('/data/DemoSelectMultiField:label')"/>
+      <hint ref="jr:itext('/data/DemoSelectMultiField:hint')"/>
+      <item>
+        <label ref="jr:itext('/data/DemoSelectMultiField:option0')"/>
+        <value>option 1 val</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/data/DemoSelectMultiField:option1')"/>
+        <value>option 2 val</value>
+      </item>
+    </select>
+    <group>
+      <label ref="jr:itext('/data/DemoGroupField:label')"/>
+      <input ref="/data/DemoGroupField/DemoGroupedText1">
+        <label ref="jr:itext('/data/DemoGroupField/DemoGroupedText1:label')"/>
+      </input>
+      <input ref="/data/DemoGroupField/DemoGroupedText2">
+        <label ref="jr:itext('/data/DemoGroupField/DemoGroupedText2:label')"/>
+      </input>
+    </group>
+  </h:body>
+</h:html>

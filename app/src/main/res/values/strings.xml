@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- MISC / GLOBAL -->
+    <string name="app_name">Smap SMS Gateway</string>
+    <string name="action_settings">Settings</string>
+    <string name="ok">OK</string>
+    <string name="template_quotient">%1$d/%2$d</string>
+
+    <!-- Surveys -->
+    <string name="ab_distribution_details">Distribution Details</string>
+    <string name="ab_distributions">Distributions</string>
+    <string name="ab_surveys">Surveys</string>
+    <string name="ab_create_distribution">Create Distribution</string>
+    <string name="surveys_subtitle">Local Survey Templates</string>
+    <string name="surveys_of_total">OF %1$d</string>
+    <!-- Email -->
+    <string name="contact_choose_email_client">Please choose your mail client</string>
+
+    <!-- Contacts -->
+    <string name="ab_select_contacts">Select Contacts</string>
+    <string name="ab_all_contacts">All Contacts</string>
+
+    <!-- Settings -->
+    <string name="ab_settings">Settings</string>
+
+
+
+</resources>

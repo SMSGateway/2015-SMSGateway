@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/smap_cream"
+    android:orientation="vertical"
+    android:padding="12dp" >
+
+    <EditText
+        android:id="@+id/txt_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="USERNAME"
+        android:textColorHint="@color/smap_blue"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/txt_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="PASSWORD"
+        android:inputType="textPassword"
+        android:textColorHint="@color/smap_blue"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/smap_light_green"
+        android:text="SUBMIT"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

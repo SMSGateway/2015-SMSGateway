@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/smap_dark_grey"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="12dp"
+        android:text="@string/surveys_subtitle"
+        android:textColor="@color/smap_cream"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <com.mjw.android.swipe.SwipeListView
+        xmlns:swipe="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/list_surveys"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/smap_dark_grey"
+        android:dividerHeight="1dp" 
+        android:background="@color/smap_med_grey"
+        android:listSelector="#00000000"
+        app:swipeActionRight="choice"
+        app:swipeOffsetRight="90dp"
+        swipe:swipeBackView="@+id/back"
+        swipe:swipeCloseAllItemsWhenMoveList="false"
+        swipe:swipeDrawableChecked="@drawable/choice_selected"
+        swipe:swipeDrawableUnchecked="@drawable/choice_unselected"
+        swipe:swipeFrontView="@+id/front_survey"
+        swipe:swipeMode="right"
+        swipe:swipeOpenOnLongPress="false"/>
+
+</LinearLayout>

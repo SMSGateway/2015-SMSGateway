@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/smap_dark_grey"
+    android:orientation="vertical" >
+
+    <include layout="@layout/layout_distribution_detail_info" />
+
+    <com.mjw.android.swipe.SwipeListView
+        xmlns:swipe="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/list_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/smap_med_grey"
+        android:dividerHeight="1dp"
+        android:listSelector="#00000000"
+        android:layout_weight="1"
+        app:swipeActionRight="choice"
+        app:swipeOffsetLeft="90dp"
+        swipe:swipeBackView="@+id/back"
+        swipe:swipeCloseAllItemsWhenMoveList="false"
+        swipe:swipeDrawableChecked="@drawable/choice_selected"
+        swipe:swipeDrawableUnchecked="@drawable/choice_unselected"
+        swipe:swipeFrontView="@+id/front"
+        swipe:swipeMode="both" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/smap_light_green"
+        android:text="Distribute Survey"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

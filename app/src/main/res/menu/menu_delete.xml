@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.smap.MainActivity" >
+
+    <item
+        android:id="@+id/menu_delete_survey"
+        android:icon="@drawable/action_bar_icon_discard"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Remove Survey"/>
+
+</menu>

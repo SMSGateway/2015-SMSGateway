@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="response_contact_not_active">You are not active in any surveys! Contact Administrator.</string>
+    <string name="survey_complete">Survey Complete.  Thanks for participating!</string>
+</resources>

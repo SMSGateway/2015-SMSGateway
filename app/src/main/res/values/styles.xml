@@ -1,0 +1,65 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:actionBarStyle">@style/SmapActionBar</item>
+        <item name="android:listViewStyle">@style/TransparentListView</item>
+        <item name="android:expandableListViewStyle">@style/TransparentExpandableListView</item>
+    </style>
+
+    <style name="TransparentListView" parent="@android:style/Widget.ListView">
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+    </style>
+
+    <style name="TransparentExpandableListView" parent="@android:style/Widget.ExpandableListView">
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+    </style>
+
+    <style name="SmapActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/smap_dark_green</item>
+        <item name="android:titleTextStyle">@style/SmapActionBar.ActionBar.TitleTextStyle</item>
+    </style>
+
+    <style name="SmapActionBar.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="customFont">BPreplayBoldItalics.ttf</item>
+    </style>
+
+    <style name="BaseFont">
+        <item name="customFont">BPreplay.ttf</item>
+    </style>
+
+    <style name="BaseBoldFont">
+        <item name="customFont">BPreplayBoldItalics.ttf</item>
+    </style>
+
+    <style name="BlueFont" parent="BaseBoldFont">
+        <item name="android:textColor">@color/smap_blue</item>
+    </style>
+
+    <style name="GreyFont" parent="BaseFont">
+        <item name="android:textColor">@color/smap_light_grey</item>
+    </style>
+
+    <style name="DarkGreyFont" parent="BaseFont">
+        <item name="android:textColor">@color/smap_dark_grey</item>
+    </style>
+
+    <style name="ActionbarText" parent="BaseBoldFont">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+</resources>

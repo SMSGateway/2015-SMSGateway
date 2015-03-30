@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FontableTextView">
+        <attr name="customFont" format="string" />
+        <attr name="editorText" format="string" />
+    </declare-styleable>
+
+</resources>

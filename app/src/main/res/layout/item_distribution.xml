@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/smap_light_grey"
+    android:paddingBottom="12dp" >
+
+    <TextView
+        android:id="@+id/txt_name"
+        style="@style/DarkGreyFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="12dp"
+        android:singleLine="true"
+        android:text="APRIL SUVREY"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+
+    <TextView
+        android:id="@+id/txt_member_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_name"
+        android:paddingBottom="1dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="1dp"
+        android:text="X / Y"
+        android:textColor="@color/smap_dark_grey"
+        android:textSize="14dp" />
+
+    <View
+        android:id="@+id/view_progress_total"
+        android:layout_width="@dimen/survey_progress_width"
+        android:layout_height="9dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/txt_member_progress"
+        android:layout_marginLeft="12dp"
+        android:background="@color/smap_blue" />
+
+    <View
+        android:id="@+id/view_progress"
+        android:layout_width="0dp"
+        android:layout_height="9dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/txt_member_progress"
+        android:layout_marginLeft="12dp"
+        android:background="@color/smap_light_green" />
+
+
+    <ImageView
+        android:id="@+id/img_tick"
+        android:paddingRight="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_tick"
+        android:visibility="invisible" />
+
+</RelativeLayout>

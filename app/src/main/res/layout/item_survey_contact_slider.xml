@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@color/smap_dark_grey"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingRight="20dp"
+        android:tag="back" >
+
+        <TextView
+            android:id="@+id/call"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:drawableRight="@android:drawable/ic_menu_call"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            android:text="CALL"
+            android:textColor="@color/smap_cream"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/front"
+        layout="@layout/item_survey_contact"
+        android:tag="front" />
+
+</FrameLayout>
