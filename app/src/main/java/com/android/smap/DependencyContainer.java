@@ -12,10 +12,10 @@ public class DependencyContainer {
 
 	public Injector getInjector() {
 		if (mInjector == null) {
-			mInjector = Guice.createInjector(new DataLayerModule());
-		}
-		return mInjector;
-	}
+			mInjector = Guice.createInjector(    new DataLayerModule());
+}
+return mInjector;
+        }
 
 	public DataManager getDataManager() {
 		if (mDataManager == null) {

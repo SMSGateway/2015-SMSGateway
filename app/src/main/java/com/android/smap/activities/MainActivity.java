@@ -73,8 +73,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
 
     private void toggleDraw() {
 
-        DrawerLayout drawer = mQuery.find(R.id.layout_drawer).get(
-                DrawerLayout.class);
+        DrawerLayout drawer = mQuery.find(R.id.layout_drawer).get(DrawerLayout.class);
         View menuView = mMenuQuery.get();
         if (drawer.isDrawerOpen(menuView)) {
             drawer.closeDrawer(menuView);

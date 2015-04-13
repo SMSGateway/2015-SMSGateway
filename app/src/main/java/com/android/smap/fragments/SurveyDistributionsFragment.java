@@ -23,28 +23,21 @@ import com.android.smap.di.DataManager;
 import com.android.smap.ui.ViewQuery;
 import com.google.inject.Inject;
 
-public class SurveyDistributionsFragment extends BaseFragment implements
-		OnItemClickListener {
+public class SurveyDistributionsFragment extends BaseFragment implements OnItemClickListener {
 
-    public static final String		EXTRA_SURVEY_ID	= DistributionDetailFragment.class
-            .getCanonicalName()
-            + "id";
+    public static final String EXTRA_SURVEY_ID = DistributionDetailFragment.class.getCanonicalName() + "id";
 
-	private Survey             mSurvey;
+	private Survey mSurvey;
 
     @Inject
-	private DataManager		mDataManager;
-
-
+	private DataManager mDataManager;
 
     // TODO - Create Distribution Adapter
     private DistributionAdapter mAdapter;
 
     @Override
     public View onCreateContentView(LayoutInflater inflater, Bundle savedInstanceState) {
-		LinearLayout view = (LinearLayout) inflater.inflate(
-				R.layout.fragment_distributions,
-				null);
+		LinearLayout view = (LinearLayout) inflater.inflate(R.layout.fragment_distributions,null);
         mDataManager = GatewayApp.getDependencyContainer().getDataManager();
         Bundle b = getArguments();
         if (b != null) {
@@ -74,7 +67,7 @@ public class SurveyDistributionsFragment extends BaseFragment implements
 		b.putLong(DistributionDetailFragment.EXTRA_DISTRIBUTION_ID, distribution.getId());
 
         startActivity(new Builder(getActivity(), DistributionDetailFragment.class)
-				.arguments(b).title(R.string.ab_distribution_details).build());
+                .arguments(b).title(R.string.ab_distribution_details).build());
 	}
 
 	@Override
