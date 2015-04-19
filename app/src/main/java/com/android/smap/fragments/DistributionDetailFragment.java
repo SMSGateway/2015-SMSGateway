@@ -111,16 +111,14 @@ public class DistributionDetailFragment extends BaseFragment implements OnClickL
         //bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
-    //unbind service
+    //unbind the service when stop
+    @Override
     public void onStop() {
         super.onStop();
-        if(mBound) {
-            this.getActivity().unbindService(mConnection);
-            mBound = false;
-        }
+        this.getActivity().unbindService(mConnection);
     }
 
-	@Override
+    @Override
 	public void onResume() {
 		super.onResume();
 
@@ -193,8 +191,6 @@ public class DistributionDetailFragment extends BaseFragment implements OnClickL
 		mSwipeListView.setAdapter(mAdapter);
 
 	}
-
-
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
