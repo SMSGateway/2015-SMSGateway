@@ -12,7 +12,7 @@ android {
 
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
@@ -32,7 +32,11 @@ dependencies {
     compile 'javax.inject:javax.inject:1'
     compile 'net.sf.kxml:kxml2:2.3.0'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
+    compile files('libs/commons-io-2.4.jar')
     compile files('libs/ActiveAndroid.jar')
     compile files('libs/javarosa-libraries-2014-04-29.jar')
     compile files('libs/smap-survey-manager-0.2.4.jar')
+    compile files('libs/android-async-http-1.4.7.jar')
+
+//    compile group: 'org.apache.httpcomponents' , name: 'httpclient-android' , version: '4.3.5.1'
 }
