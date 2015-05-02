@@ -1,6 +1,7 @@
 package com.android.smap.fragments;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,7 +73,16 @@ public class FormListFragment extends BaseFragment implements
 
 	@Override
 	public void onControllerError(ControllerError error) {
-        MWUiUtils.showMessagePopup(this.getActivity(), "Failed to retrieve Surveys");
+//        MWUiUtils.showMessagePopup(this.getActivity(), "Failed to retrieve Surveys");
+        MWUiUtils.showMessagePopup(getActivity(), "Failed to retrieve Surveys",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+
+                        dialog.dismiss();
+                        getActivity().onBackPressed();
+                    }
+                });
         showLoading(false);
 //        getActivity().onBackPressed();
 	}

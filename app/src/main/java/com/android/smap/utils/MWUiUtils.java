@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.android.smap.R;
+import com.android.smap.activities.FragmentContainerActivity;
 
 public class MWUiUtils {
 
@@ -63,12 +64,15 @@ public class MWUiUtils {
 	 * 
 	 * @param messageResource
 	 */
-	public static void showMessagePopup(Context context, String message) {
+	public static void showMessagePopup(final Context context, String message) {
+
 		showMessagePopup(context, message,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog,
 							int which) {
+
 						dialog.dismiss();
+
 					}
 				});
 	}
@@ -78,12 +82,12 @@ public class MWUiUtils {
 	 * 
 	 * @param messageResource
 	 */
-	private static void showMessagePopup(Context context,
+
+	public static void showMessagePopup(Context context,
 			String message,
 			DialogInterface.OnClickListener listener) {
-		new AlertDialog.Builder(context)
-				.setMessage(message)
-				.setCancelable(false)
+        new AlertDialog.Builder(context).setMessage(message)
+			    .setCancelable(false)
 				.setNegativeButton(R.string.ok, listener)
 				.show();
 	}
