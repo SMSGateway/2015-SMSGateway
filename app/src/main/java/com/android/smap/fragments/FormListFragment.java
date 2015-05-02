@@ -1,6 +1,6 @@
 package com.android.smap.fragments;
 
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,8 +14,10 @@ import android.widget.ListView;
 
 import com.android.smap.GatewayApp;
 import com.android.smap.R;
+import com.android.smap.activities.BaseActivity;
 import com.android.smap.activities.FragmentContainerActivity;
 import com.android.smap.activities.FragmentContainerActivity.Builder;
+import com.android.smap.activities.MainActivity;
 import com.android.smap.adapters.FormListAdapter;
 import com.android.smap.api.models.Survey;
 import com.android.smap.api.models.FormList.Form;
@@ -68,17 +70,11 @@ public class FormListFragment extends BaseFragment implements
         showLoading(false);
 	}
 
-
-
 	@Override
 	public void onControllerError(ControllerError error) {
-        if(error.getTitle() == "error"){
-            Log.e(FormListFragment.class.getSimpleName(), "connection exception 503");
-        } else {
-            MWUiUtils.showMessagePopup(this.getActivity(), "Failed to retrieve Surveys");
-        }
+        MWUiUtils.showMessagePopup(this.getActivity(), "Failed to retrieve Surveys");
         showLoading(false);
-        getActivity().onBackPressed();
+//        getActivity().onBackPressed();
 	}
 
 	@Override
