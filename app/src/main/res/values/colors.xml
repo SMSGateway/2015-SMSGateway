@@ -14,5 +14,5 @@
 
     <!-- BASE CLASSES -->
     <color name="loading_bg">#80545454</color>
-
+    <color name="dialog_color">#FFFFFFFF</color>
 </resources>

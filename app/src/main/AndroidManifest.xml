@@ -9,7 +9,7 @@
         android:targetSdkVersion="19" />
 
     <!-- PERMISSIONS -->
-	<uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
@@ -39,16 +39,20 @@
 
         <!-- Our primary check service -->
         <service
-            android:name="com.android.smap.sms.MonitorService"
+            android:name=".sms.MonitorService"
             android:enabled="true" />
 
         <!-- The heart of our app -->
         <service
-            android:name="com.android.smap.sms.GatewayService"
+            android:name=".sms.GatewayService"
             android:enabled="true" />
-        
-        <meta-data android:name="AA_DB_NAME" android:value="smap-database.db" />
-        <meta-data android:name="AA_DB_VERSION" android:value="1" />
+
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="smap-database.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1" />
 
         <!-- Listen for boot events to make sure our service is running -->
         <receiver android:name=".sms.ServiceRebooter" >
@@ -71,8 +75,7 @@
 
         <activity
             android:name=".activities.MainActivity"
-            android:icon="@drawable/ic_menu"
-            >
+            android:icon="@drawable/ic_menu" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

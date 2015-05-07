@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.smap.GatewayApp;
 import com.android.smap.R;
@@ -49,6 +50,13 @@ public class ContactsFragment extends BaseFragment implements OnItemClickListene
         listView.setAdapter(mAdapter);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(this.getActivity(),"sdsd",Toast.LENGTH_SHORT).show();
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

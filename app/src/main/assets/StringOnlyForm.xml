@@ -1,0 +1,63 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+  <h:head>
+    <h:title>String only form</h:title>
+    <model>
+      <instance>
+        <data id="build_String-only-form_1406426192">
+          <meta>
+            <instanceID/>
+          </meta>
+          <textFieldVanilla/>
+          <textFieldRequired/>
+          <textFieldLength/>
+        </data>
+      </instance>
+      <itext>
+        <translation lang="eng">
+          <text id="/data/textFieldVanilla:label">
+            <value>Text Field Vanilla</value>
+          </text>
+          <text id="/data/textFieldVanilla:hint">
+            <value>no restrictions on this field</value>
+          </text>
+          <text id="/data/textFieldRequired:label">
+            <value>Text Field Required</value>
+          </text>
+          <text id="/data/textFieldRequired:hint">
+            <value>this is a required field</value>
+          </text>
+          <text id="/data/textFieldRequired:constraintMsg">
+            <value>Text Field Required</value>
+          </text>
+          <text id="/data/textFieldLength:label">
+            <value>Text Field Length</value>
+          </text>
+          <text id="/data/textFieldLength:hint">
+            <value>Length &gt; 5 &amp;&amp; &lt; 10</value>
+          </text>
+          <text id="/data/textFieldLength:constraintMsg">
+            <value>Text Field Length</value>
+          </text>
+        </translation>
+      </itext>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
+      <bind nodeset="/data/textFieldVanilla" type="string"/>
+      <bind nodeset="/data/textFieldRequired" type="string" required="true()" jr:constraintMsg="jr:itext('/data/textFieldRequired:constraintMsg')"/>
+      <bind nodeset="/data/textFieldLength" type="string" constraint="(regex(., &quot;^.{5,10}$&quot;))" jr:constraintMsg="jr:itext('/data/textFieldLength:constraintMsg')"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/data/textFieldVanilla">
+      <label ref="jr:itext('/data/textFieldVanilla:label')"/>
+      <hint ref="jr:itext('/data/textFieldVanilla:hint')"/>
+    </input>
+    <input ref="/data/textFieldRequired">
+      <label ref="jr:itext('/data/textFieldRequired:label')"/>
+      <hint ref="jr:itext('/data/textFieldRequired:hint')"/>
+    </input>
+    <input ref="/data/textFieldLength">
+      <label ref="jr:itext('/data/textFieldLength:label')"/>
+      <hint ref="jr:itext('/data/textFieldLength:hint')"/>
+    </input>
+  </h:body>
+</h:html>

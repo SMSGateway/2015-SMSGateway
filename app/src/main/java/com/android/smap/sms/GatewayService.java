@@ -12,7 +12,7 @@ import com.android.smap.GatewayApp;
 import com.android.smap.api.services.MessageSender;
 import com.android.smap.api.services.MessageResponder;
 import com.android.smap.commonsware.wakefull.WakefulIntentService;
-import com.android.smap.controllers.ControllerError;
+import com.android.smap.controllers.NetworkError;
 import com.android.smap.controllers.ControllerErrorListener;
 import com.android.smap.controllers.ControllerListener;
 import com.android.smap.models.SmapTextMessage;
@@ -128,7 +128,7 @@ public class GatewayService extends Service implements
 
         // message
 
-        // send volley request
+        // send http request
     }
 
     public void markMessageDelivered(TextMessage msg) {
@@ -184,7 +184,7 @@ public class GatewayService extends Service implements
     }
 
     @Override
-    public void onControllerError(ControllerError error) {
+    public void onControllerError(NetworkError error) {
         // TODO error with request handeling.
 
     }

@@ -14,7 +14,5 @@ public class ControllerFactory {
 
 	public static Controller fetch(Gojo gojo, GatewayService relayService) {
 		return null;
-
-
 	}
 }

@@ -24,17 +24,16 @@ import com.android.smap.ui.ViewQuery;
 import com.google.inject.Inject;
 
 public class SurveyDistributionsFragment extends BaseFragment implements
-		OnItemClickListener {
+        OnItemClickListener {
 
-    public static final String		EXTRA_SURVEY_ID	= DistributionDetailFragment.class
+    public static final String EXTRA_SURVEY_ID = DistributionDetailFragment.class
             .getCanonicalName()
             + "id";
 
-	private Survey             mSurvey;
+    private Survey mSurvey;
 
     @Inject
-	private DataManager		mDataManager;
-
+    private DataManager mDataManager;
 
 
     // TODO - Create Distribution Adapter
@@ -42,9 +41,9 @@ public class SurveyDistributionsFragment extends BaseFragment implements
 
     @Override
     public View onCreateContentView(LayoutInflater inflater, Bundle savedInstanceState) {
-		LinearLayout view = (LinearLayout) inflater.inflate(
-				R.layout.fragment_distributions,
-				null);
+        LinearLayout view = (LinearLayout) inflater.inflate(
+                R.layout.fragment_distributions,
+                null);
         mDataManager = GatewayApp.getDependencyContainer().getDataManager();
         Bundle b = getArguments();
         if (b != null) {
@@ -52,54 +51,54 @@ public class SurveyDistributionsFragment extends BaseFragment implements
         }
         TextView textView = (TextView) view.findViewById(R.id.txt_survey_name);
         textView.setText(mSurvey.getName());
-		ListView listView = (ListView) view.findViewById(R.id.list_distributions);
-		//mDataManager = GatewayApp.getDependencyContainer().getDataManager();
+        ListView listView = (ListView) view.findViewById(R.id.list_distributions);
+        //mDataManager = GatewayApp.getDependencyContainer().getDataManager();
         mAdapter = new DistributionAdapter(getActivity(), mSurvey.getDistributions());
-		listView.setOnItemClickListener(this);
-		listView.setAdapter(mAdapter);
+        listView.setOnItemClickListener(this);
+        listView.setAdapter(mAdapter);
 
         return view;
-	}
+    }
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		mAdapter.setModel(mSurvey.getDistributions());
-	}
+    @Override
+    public void onResume() {
+        super.onResume();
+        mAdapter.setModel(mSurvey.getDistributions());
+    }
 
-	@Override
-	public void onItemClick(AdapterView<?> av, View parent, int pos, long viewId) {
-		Distribution distribution = mAdapter.getItem(pos);
-		Bundle b = new Bundle();
-		b.putLong(DistributionDetailFragment.EXTRA_DISTRIBUTION_ID, distribution.getId());
+    @Override
+    public void onItemClick(AdapterView<?> av, View parent, int pos, long viewId) {
+        Distribution distribution = mAdapter.getItem(pos);
+        Bundle b = new Bundle();
+        b.putLong(DistributionDetailFragment.EXTRA_DISTRIBUTION_ID, distribution.getId());
 
         startActivity(new Builder(getActivity(), DistributionDetailFragment.class)
-				.arguments(b).title(R.string.ab_distribution_details).build());
-	}
+                .arguments(b).title(R.string.ab_distribution_details).build());
+    }
 
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
-		inflater = getActivity().getMenuInflater();
-		inflater.inflate(R.menu.menu_add, menu);
-	}
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_add, menu);
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		boolean handled = true;
-		switch (item.getItemId()) {
-		case android.R.id.home: // Actionbar home/up icon
-			getActivity().onBackPressed();
-			break;
-		case R.id.action_add:
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean handled = true;
+        switch (item.getItemId()) {
+            case android.R.id.home: // Actionbar home/up icon
+                getActivity().onBackPressed();
+                break;
+            case R.id.action_add:
 
-            Bundle b = new Bundle();
-            b.putLong(EXTRA_SURVEY_ID, mSurvey.getId());
-            startActivity(new Builder(getActivity(), SurveyDistributionCreateFragment.class)
-                    .arguments(b).title(R.string.ab_create_distribution).build());
-			break;
-		}
-		return handled;
-	}
+                Bundle b = new Bundle();
+                b.putLong(EXTRA_SURVEY_ID, mSurvey.getId());
+                startActivity(new Builder(getActivity(), SurveyDistributionCreateFragment.class)
+                        .arguments(b).title(R.string.ab_create_distribution).build());
+                break;
+        }
+        return handled;
+    }
 
 }

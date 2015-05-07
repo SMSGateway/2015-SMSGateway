@@ -3,16 +3,13 @@ package com.android.smap.utils;
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
 
-import com.android.volley.toolbox.ImageLoader.ImageCache;
-
 /**
  * Determine cache size at runtime.
  * 
  * @return
  */
 
-public class BitmapLruCache extends LruCache<String, Bitmap> implements
-        ImageCache {
+public class BitmapLruCache extends LruCache<String, Bitmap>   {
 
     public static int getDefaultLruCacheSize() {
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
@@ -31,16 +28,6 @@ public class BitmapLruCache extends LruCache<String, Bitmap> implements
     @Override
     protected int sizeOf(String key, Bitmap value) {
         return value.getRowBytes() * value.getHeight() / 1024;
-    }
-
-    @Override
-    public Bitmap getBitmap(String url) {
-        return get(url);
-    }
-
-    @Override
-    public void putBitmap(String url, Bitmap bitmap) {
-        put(url, bitmap);
     }
 
 }

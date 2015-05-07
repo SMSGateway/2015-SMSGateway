@@ -8,5 +8,5 @@ package com.android.smap.controllers;
  * 
  */
 public interface ControllerErrorListener {
-	public void onControllerError(ControllerError error);
+	public void onControllerError(NetworkError error);
 }

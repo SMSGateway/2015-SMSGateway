@@ -31,4 +31,8 @@ public interface ApiConstants {
 	public static final int		DEFAULT_TIMEOUT				= 20000;
 	public static final int		DEFAULT_PAGE_SIZE			= 10;
 
+    public static final String	DO_GET					= "GET";
+    public static final String	DO_POST					= "POST";
+
+
 }

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
@@ -12,11 +11,9 @@ import android.widget.ListView;
 
 import com.android.smap.GatewayApp;
 import com.android.smap.R;
-import com.android.smap.activities.FragmentContainerActivity.Builder;
 import com.android.smap.adapters.FormListAdapter;
-import com.android.smap.api.models.Survey;
 import com.android.smap.api.models.FormList.Form;
-import com.android.smap.controllers.ControllerError;
+import com.android.smap.controllers.NetworkError;
 import com.android.smap.controllers.ControllerErrorListener;
 import com.android.smap.controllers.ControllerListener;
 import com.android.smap.controllers.FormListController;
@@ -65,7 +62,7 @@ public class FormListFragment extends BaseFragment implements
 	}
 
 	@Override
-	public void onControllerError(ControllerError error) {
+	public void onControllerError(NetworkError error) {
 		MWUiUtils.showMessagePopup(getActivity(), "Failed to retrieve Surveys");
         showLoading(false);
         getActivity().onBackPressed();

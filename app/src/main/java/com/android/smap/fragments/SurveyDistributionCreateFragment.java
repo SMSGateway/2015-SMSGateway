@@ -16,14 +16,15 @@ import com.android.smap.ui.ViewQuery;
 import com.android.smap.utils.MWUiUtils;
 
 public class SurveyDistributionCreateFragment extends BaseFragment implements
-		OnClickListener {
+        OnClickListener {
 
-    public static final String		EXTRA_SURVEY_ID	= DistributionDetailFragment.class
+    public static final String EXTRA_SURVEY_ID = DistributionDetailFragment.class
             .getCanonicalName()
             + "id";
 
-	private EditText	name;
-    private long			mSurveyId;
+    private EditText name;
+    private long mSurveyId;
+
     @Override
     public View onCreateContentView(LayoutInflater inflater, Bundle savedInstanceState) {
         Bundle b = getArguments();
@@ -31,26 +32,26 @@ public class SurveyDistributionCreateFragment extends BaseFragment implements
             mSurveyId = b.getLong(EXTRA_SURVEY_ID);
         }
 
-		LinearLayout view = (LinearLayout) inflater.inflate(
-				R.layout.fragment_distribution_create,
-				null);
-		ViewQuery query = new ViewQuery(view);
-		query.find(R.id.btn_submit).onClick(this).get();
-	    name = (EditText) query.find(R.id.txt_name).get();
-		return view;
-	}
+        LinearLayout view = (LinearLayout) inflater.inflate(
+                R.layout.fragment_distribution_create,
+                null);
+        ViewQuery query = new ViewQuery(view);
+        query.find(R.id.btn_submit).onClick(this).get();
+        name = (EditText) query.find(R.id.txt_name).get();
+        return view;
+    }
 
-	@Override
-	public void onClick(View arg0) {
+    @Override
+    public void onClick(View arg0) {
         //Switch over to "create distribution" with name
         Survey survey = Survey.findById(mSurveyId);
 
         survey.createDistribution(name.getText().toString());
         survey.save();
 
-		MWUiUtils.hideKeyboard(getActivity());
+        MWUiUtils.hideKeyboard(getActivity());
         getActivity().onBackPressed();
-	}
+    }
 
 
     @Override

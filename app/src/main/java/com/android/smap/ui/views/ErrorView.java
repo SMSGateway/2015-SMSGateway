@@ -3,7 +3,7 @@ package com.android.smap.ui.views;
 import android.content.Context;
 import android.widget.LinearLayout;
 
-import com.android.smap.controllers.ControllerError;
+import com.android.smap.controllers.NetworkError;
 import com.android.smap.ui.OnErrorTouchedListener;
 
 public class ErrorView extends LinearLayout {
@@ -18,7 +18,7 @@ public class ErrorView extends LinearLayout {
 
 	}
 
-	public void showErrorLayout(boolean b, ControllerError error) {
+	public void showErrorLayout(boolean b, NetworkError error) {
 		// TODO Auto-generated method stub
 
 	}

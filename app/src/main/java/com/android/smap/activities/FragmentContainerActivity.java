@@ -83,5 +83,4 @@ public class FragmentContainerActivity extends BaseActivity {
         ft.commit();
     }
 
-
 }

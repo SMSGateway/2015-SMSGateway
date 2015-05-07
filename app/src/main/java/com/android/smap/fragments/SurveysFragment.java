@@ -22,7 +22,6 @@ import com.google.inject.Inject;
 import com.mjw.android.swipe.MultiChoiceSwipeListener;
 import com.mjw.android.swipe.SwipeListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SurveysFragment extends BaseFragment {

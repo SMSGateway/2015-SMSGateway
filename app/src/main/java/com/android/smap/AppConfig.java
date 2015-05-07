@@ -9,7 +9,7 @@ public class AppConfig {
 	}
 
 	public int getTimeoutInMillis() {
-		// TODO timeout for Volley requests
+		// TODO timeout for http requests
 		return 0;
 	}
 

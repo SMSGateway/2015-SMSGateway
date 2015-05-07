@@ -10,7 +10,7 @@ import java.util.List;
 import com.activeandroid.ActiveAndroid;
 import com.android.smap.di.DataManager;
 import com.android.smap.utils.IntRange;
-
+import com.android.smap.utils.XmlContent;
 
 
 public class SqliteDataManager implements DataManager {
@@ -97,16 +97,16 @@ public class SqliteDataManager implements DataManager {
 
 		try {
 			
-			Survey birdsSurvey = new Survey("Birds", "parse xml content here");
+			Survey birdsSurvey = new Survey("Birds", XmlContent.xmlContent);
             birdsSurvey.save();
             Distribution summerBirds = birdsSurvey.createDistribution("Summer Birds");
 
-			Survey householdSurvey = new Survey("Household Survey", "parse xml content here");
+			Survey householdSurvey = new Survey("Household Survey", XmlContent.xmlContent);
             householdSurvey.save();
             Distribution householdDist = householdSurvey.createDistribution("Main Distribution");
 
 			for (int n : IntRange.between(1, 10)) {
-				Contact contact = new Contact("Contact " + n, "0123456789");
+				Contact contact = new Contact("Contact " + n, "5556");
 				contact.save();
 				
 				Distribution survey = (n % 2 == 0) ? summerBirds: householdDist;
