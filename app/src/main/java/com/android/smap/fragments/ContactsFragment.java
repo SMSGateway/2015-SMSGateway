@@ -34,15 +34,14 @@ public class ContactsFragment extends BaseFragment implements OnItemClickListene
     private DataManager mDataManager;
     private ContactAdapter mAdapter;
     private List<Contact> list;
+    private ListView listView;
 
     @Override
     public View onCreateContentView(LayoutInflater inflater, Bundle savedInstanceState) {
 
-        LinearLayout view = (LinearLayout) inflater.inflate(
-                R.layout.fragment_contact,
-                null);
+        LinearLayout view = (LinearLayout) inflater.inflate(R.layout.fragment_contact,null);
         mDataManager = GatewayApp.getDependencyContainer().getDataManager();
-        ListView listView = (ListView) view.findViewById(R.id.list_contacts);
+        listView = (ListView) view.findViewById(R.id.list_contacts);
         listView.setOnItemClickListener(this);
         list = mDataManager.getContacts();
 
@@ -103,14 +102,27 @@ public class ContactsFragment extends BaseFragment implements OnItemClickListene
             String name = "";
             String number = "";
             try {
-                    name = contactsManager.getContactName();
-                    number = contactsManager.getContactPhone();
-                    Contact contact = new Contact(name, number);
-                    contact.save();
-                } catch (Exception e) {
-                    Log.e("CONTACTS", e.getMessage());
-                }
+                name = contactsManager.getContactName();
+                number = contactsManager.getContactPhone();
+                Contact contact = new Contact(name, number);
+                contact.save();
+            } catch (Exception e) {
+                Log.e("CONTACTS", e.getMessage());
+            }
+            refreshContactListView();
         }
+
     }
+
+    //get the contacts data from the phone again and refresh listView
+    public void refreshContactListView()
+    {
+        mDataManager = GatewayApp.getDependencyContainer().getDataManager();
+        list = mDataManager.getContacts();
+        mAdapter = new ContactAdapter(getActivity(), R.layout.contact_allusers_rows, list);
+        listView.setAdapter(mAdapter);
+        listView.invalidateViews();
+    }
+
 }
 
