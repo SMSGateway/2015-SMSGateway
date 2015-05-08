@@ -16,9 +16,13 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 
 /**
+ * This class is a base class used for doing a http request
+ * <p/>
  * Created by kai on 7/05/2015.
  */
 public abstract class HttpUrlRequest<T> implements ApiConstants {
@@ -28,11 +32,13 @@ public abstract class HttpUrlRequest<T> implements ApiConstants {
     private String password;
     private String method;
     private int responseCode;
+    private int port;
     private boolean digestAuth;
     private HttpListener<T> httpListener;
     private HttpErrorListener httpErrorListener;
 
     protected HttpUrlRequest(String url, String method, boolean digestAuth, HttpListener<T> httpListener, HttpErrorListener httpErrorListener) {
+        port = 80;
         this.url = url;
         this.method = method;
         this.digestAuth = digestAuth;
@@ -40,10 +46,12 @@ public abstract class HttpUrlRequest<T> implements ApiConstants {
         this.httpErrorListener = httpErrorListener;
 
         if (digestAuth) {
-//            username = GatewayApp.getPreferenceWrapper().getUserName();
-//            password = GatewayApp.getPreferenceWrapper().getPassword();
-            username = "admin";
-            password = "admin";
+            username = GatewayApp.getPreferenceWrapper().getUserName();
+            password = GatewayApp.getPreferenceWrapper().getPassword();
+            if (username == null || password == null) {
+                username = "admin";
+                password = "admin";
+            }
         }
     }
 
@@ -61,6 +69,10 @@ public abstract class HttpUrlRequest<T> implements ApiConstants {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 
     public int getResponseCode() {
@@ -88,12 +100,27 @@ public abstract class HttpUrlRequest<T> implements ApiConstants {
     }
 
     public NetworkError parseNetworkError(String errorStr) {
-        NetworkError error = null;
-
+        NetworkError error = new NetworkError();
+        error.setNetworkErrorMessage(errorStr);
         return error;
     }
 
+    public void addPortToUrlStr() {
+        try {
+            URL url = new URL(this.url);
+            this.url = url.getProtocol() + "://" + url.getHost();
+            String path = url.toString().substring(this.url.length());
+            this.url += ":" + String.valueOf(port) + path;
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            Log.i("HttpUrlRequest", "It is failure to add port to Url.");
+        }
+    }
+
     public void executeRequest() {
+        // Add port to Url scheme
+        addPortToUrlStr();
         new NetworkConnectionTask().execute(url);
     }
 
@@ -104,8 +131,9 @@ public abstract class HttpUrlRequest<T> implements ApiConstants {
 
         if (isDigestAuth()) {
             finalConn = HttpURLDigestAuth.tryDigestAuthentication(conn, username, password);
-        } else
+        } else {
             finalConn = conn;
+        }
 
         finalConn.setReadTimeout(10000 /* milliseconds */);
         finalConn.setConnectTimeout(15000 /* milliseconds */);
@@ -134,6 +162,9 @@ public abstract class HttpUrlRequest<T> implements ApiConstants {
             // params comes from the execute() call: params[0] is the url.
             try {
                 return downloadUrl(urls[0]);
+            } catch (SocketTimeoutException e) {
+                e.printStackTrace();
+                return httpErrorListener.errorMessage;
             } catch (IOException e) {
                 e.printStackTrace();
                 return httpErrorListener.errorMessage;
@@ -143,11 +174,11 @@ public abstract class HttpUrlRequest<T> implements ApiConstants {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Log.i("resultAsString:", result);
+            Log.i("ResultAsString:", result);
 
             if (result.equals(httpErrorListener.errorMessage)) {
                 NetworkError error = new NetworkError();
-                error.setNetworkDescription(result);
+                error.setNetworkErrorMessage(result);
                 httpErrorListener.onErrorResponse(error);
 
             } else if (responseCode >= 400) {
@@ -159,13 +190,14 @@ public abstract class HttpUrlRequest<T> implements ApiConstants {
         }
     }
 
-    private String downloadUrl(String myUrl) throws IOException {
+    private String downloadUrl(String myUrl) throws SocketTimeoutException, IOException {
         InputStream in = null;
 
         try {
             URL url = new URL(myUrl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             HttpURLConnection finalConn;
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            Log.i("request url", " " + conn.getURL().toString());
 
             if (method.equals(DO_GET))
                 finalConn = doGet(conn);
@@ -212,4 +244,5 @@ public abstract class HttpUrlRequest<T> implements ApiConstants {
         }
         return new String(baf.toByteArray());
     }
+
 }

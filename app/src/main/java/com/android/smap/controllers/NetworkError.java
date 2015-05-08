@@ -8,38 +8,34 @@ package com.android.smap.controllers;
  */
 public class NetworkError {
 
-    private String networkMessage = "";
-    private String networkDescription = "";
+    private String networkErrorMessage = "";
+    private String networkErrorDescription = "";
     private int networkErrorCode;
 
     public NetworkError() {
+        networkErrorCode = 0;
     }
 
-    public NetworkError(int networkErrorCode) {
+    public NetworkError(String networkErrorMessage, String networkErrorDescription, int networkErrorCode) {
+        this.networkErrorMessage = networkErrorMessage;
+        this.networkErrorDescription = networkErrorDescription;
         this.networkErrorCode = networkErrorCode;
     }
 
-    public NetworkError(String networkMessage, String networkDescription, int networkErrorCode) {
-        this.networkMessage = networkMessage;
-        this.networkDescription = networkDescription;
-        this.networkErrorCode = networkErrorCode;
+    public String getNetworkErrorMessage() {
+        return networkErrorMessage;
     }
 
-
-    public String getNetworkMessage() {
-        return networkMessage;
+    public void setNetworkErrorMessage(String networkErrorMessage) {
+        this.networkErrorMessage = networkErrorMessage;
     }
 
-    public void setNetworkMessage(String networkMessage) {
-        this.networkMessage = networkMessage;
+    public String getNetworkErrorDescription() {
+        return networkErrorDescription;
     }
 
-    public String getNetworkDescription() {
-        return networkDescription;
-    }
-
-    public void setNetworkDescription(String networkDescription) {
-        this.networkDescription = networkDescription;
+    public void setNetworkErrorDescription(String networkErrorDescription) {
+        this.networkErrorDescription = networkErrorDescription;
     }
 
     public int getNetworkErrorCode() {

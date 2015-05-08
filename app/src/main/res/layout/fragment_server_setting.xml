@@ -7,18 +7,18 @@
     android:padding="12dp" >
 
     <EditText
-        android:id="@+id/txt_username"
+        android:id="@+id/txt_serverIP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="USERNAME"
+        android:hint="Server IP address"
         android:textColorHint="@color/smap_blue"
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/txt_password"
+        android:id="@+id/txt_serverPort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="PASSWORD"
+        android:hint="Server port"
         android:inputType="textPassword"
         android:textColorHint="@color/smap_blue"
         android:textSize="20sp" />

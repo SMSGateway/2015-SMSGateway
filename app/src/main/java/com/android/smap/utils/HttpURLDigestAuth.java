@@ -16,6 +16,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 /**
+ * This class is used to deal with digest authentication for a connection
+ * <p/>
  * Created by kai on 30/04/2015.
  */
 public class HttpURLDigestAuth {
@@ -32,12 +34,20 @@ public class HttpURLDigestAuth {
     }
 
     public static HttpURLConnection tryDigestAuthentication(HttpURLConnection input, String username, String password) {
-        String base = input.getURL().getProtocol() + "://" + input.getURL().getHost();
+        String base = input.getURL().getProtocol() + "://" + input.getURL().getHost() + ":" + input.getURL().getPort();
         String path = input.getURL().toString().substring(base.length());
         String auth = input.getHeaderField("WWW-Authenticate");
         Log.d("auth", "auth: " + auth);
+
         if (auth == null || !auth.startsWith("Digest ")) {
-            return null;
+            final HttpURLConnection result;
+            try {
+                result = (HttpURLConnection) input.getURL().openConnection();
+                return result;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
         final HashMap<String, String> authFields = splitAuthFields(auth.substring(7));
 
@@ -65,8 +75,6 @@ public class HttpURLDigestAuth {
         String HA2 = null;
         try {
             md5.reset();
-//            String ha2str = colonJoiner.join("GET",
-//                    input.getURL().getPath());
             String ha2str = colonJoiner.join(input.getRequestMethod(),
                     path);
             md5.update(ha2str.getBytes("ISO-8859-1"));
@@ -91,7 +99,7 @@ public class HttpURLDigestAuth {
         sb.append("realm").append("=\"").append(authFields.get("realm")).append("\",");
         sb.append("nonce").append("=\"").append(authFields.get("nonce")).append("\",");
         sb.append("uri").append("=\"").append(path).append("\",");
-//        sb.append("qop"     ).append('='  ).append("auth"                  ).append(",");
+//        sb.append("qop").append('=').append("auth").append(",");
         sb.append("response").append("=\"").append(HA3).append("\"");
 
         try {
@@ -135,4 +143,5 @@ public class HttpURLDigestAuth {
             super("Problems authenticating");
         }
     }
+
 }

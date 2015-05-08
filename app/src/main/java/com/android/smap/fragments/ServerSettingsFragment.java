@@ -16,29 +16,29 @@ import com.android.smap.utils.MWUiUtils;
 public class ServerSettingsFragment extends BaseFragment implements
         OnClickListener {
 
-    private EditText password;
-    private EditText username;
+    private EditText serverHost;
+    private EditText serverPort;
 
     @Override
     public View onCreateContentView(LayoutInflater inflater, Bundle savedInstanceState) {
 
         LinearLayout view = (LinearLayout) inflater.inflate(
-                R.layout.fragment_settings,
+                R.layout.fragment_server_setting,
                 null);
         ViewQuery query = new ViewQuery(view);
         query.find(R.id.btn_submit).onClick(this).get();
-        username = (EditText) query.find(R.id.txt_username).get();
-        password = (EditText) query.find(R.id.txt_password).get();
+        serverHost = (EditText) query.find(R.id.txt_serverIP).get();
+        serverPort = (EditText) query.find(R.id.txt_serverPort).get();
 
 
-        String existingName = GatewayApp.getPreferenceWrapper().getUserName();
-        String existingPassword = GatewayApp.getPreferenceWrapper().getPassword();
+        String existingIP = GatewayApp.getPreferenceWrapper().getServerHost();
+        String existingPort = GatewayApp.getPreferenceWrapper().getServerPort();
 
-        if(!TextUtils.isEmpty(existingName)){
-            username.setText(existingName);
+        if (!TextUtils.isEmpty(existingIP)) {
+            serverHost.setText(existingIP);
         }
-        if(!TextUtils.isEmpty(existingPassword)){
-            password.setText(existingPassword);
+        if (!TextUtils.isEmpty(existingPort)) {
+            serverPort.setText(existingPort);
         }
         return view;
     }
@@ -46,10 +46,8 @@ public class ServerSettingsFragment extends BaseFragment implements
     @Override
     public void onClick(View arg0) {
 
-        GatewayApp.getPreferenceWrapper().setUserName(
-                username.getText().toString());
-        GatewayApp.getPreferenceWrapper().setPassword(
-                password.getText().toString());
+        GatewayApp.getPreferenceWrapper().setServerHost(serverHost.getText().toString());
+        GatewayApp.getPreferenceWrapper().setServerPort(serverPort.getText().toString());
         MWUiUtils.hideKeyboard(getActivity());
         MWUiUtils.showMessagePopup(getActivity(), "Details Saved");
 
@@ -62,6 +60,6 @@ public class ServerSettingsFragment extends BaseFragment implements
 
     @Override
     public String getActionBarTitle() {
-        return getActivity().getResources().getString(R.string.ab_settings);
+        return getActivity().getResources().getString(R.string.ab_server_settings);
     }
 }

@@ -17,6 +17,9 @@
     <!-- Email -->
     <string name="contact_choose_email_client">Please choose your mail client</string>
 
+    <!-- Server Settings -->
+    <string name="ab_server_settings">SMAP Server Settings</string>
+
     <!-- Contacts -->
     <string name="ab_select_contacts">Select Contacts</string>
     <string name="ab_all_contacts">All Contacts</string>
