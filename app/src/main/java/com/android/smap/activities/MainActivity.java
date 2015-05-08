@@ -16,6 +16,7 @@ import com.android.smap.R;
 import com.android.smap.adapters.MenuDrawerAdapter;
 import com.android.smap.fragments.BaseFragment;
 import com.android.smap.fragments.ContactsFragment;
+import com.android.smap.fragments.ServerSettingsFragment;
 import com.android.smap.fragments.SettingsFragment;
 import com.android.smap.fragments.SurveysFragment;
 import com.android.smap.sms.GatewayService;
@@ -97,7 +98,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
                 setInitialFragment(ContactsFragment.class);
                 return;
             case 2:
-
+                setInitialFragment(ServerSettingsFragment.class);
                 return;
             case 3:
                 setInitialFragment(SettingsFragment.class);
