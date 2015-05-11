@@ -109,7 +109,6 @@ public class ContactsFragment extends BaseFragment implements OnItemClickListene
     //get the contacts data from the phone again and refresh listView
     public void refreshContactListView()
     {
-        mDataManager = GatewayApp.getDependencyContainer().getDataManager();
         list = mDataManager.getContacts();
         mAdapter = new ContactAdapter(getActivity(), R.layout.contact_allusers_rows, list);
         listView.setAdapter(mAdapter);
