@@ -27,8 +27,7 @@ public class GatewayService extends Service implements
         ControllerErrorListener,
         MessageSender {
 
-    public static final String TAG = GatewayService.class
-            .getCanonicalName();
+    public static final String TAG = GatewayService.class.getCanonicalName();
 
     public static GatewayService s_this = null;
 

@@ -36,9 +36,7 @@ public class SurveysFragment extends BaseFragment {
     @Override
     public View onCreateContentView(LayoutInflater inflater, Bundle savedInstanceState) {
 
-        LinearLayout view = (LinearLayout) inflater.inflate(
-                R.layout.fragment_surveys,
-                null);
+        LinearLayout view = (LinearLayout) inflater.inflate(R.layout.fragment_surveys,null);
 
         ViewQuery query = new ViewQuery(view);
         mSwipeListView = (SwipeListView) query.find(R.id.list_surveys).get();
@@ -52,24 +50,18 @@ public class SurveysFragment extends BaseFragment {
 
     private void setupSurveysList() {
 
-        mAdapter = new SurveyAdapter(getActivity(), mModel,
-                mSwipeListView);
+        mAdapter = new SurveyAdapter(getActivity(), mModel,mSwipeListView);
         mSwipeListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 
-        mSwipeListView
-                .setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+        mSwipeListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
                     @Override
-                    public void onItemCheckedStateChanged(ActionMode mode,
-                                                          int position,
-                                                          long id, boolean checked) {
-                        mode.setTitle("Remove ("
-                                + mSwipeListView.getCountSelected() + ")");
+                    public void onItemCheckedStateChanged(ActionMode mode,int position,long id, boolean checked) {
+                        mode.setTitle("Remove ("+ mSwipeListView.getCountSelected() + ")");
                     }
 
                     @Override
-                    public boolean onActionItemClicked(ActionMode mode,
-                                                       MenuItem item) {
+                    public boolean onActionItemClicked(ActionMode mode,MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu_delete_survey:
                                 mSwipeListView.dismissSelected();
@@ -82,8 +74,7 @@ public class SurveysFragment extends BaseFragment {
                     }
 
                     @Override
-                    public boolean onCreateActionMode(ActionMode mode,
-                                                      Menu menu) {
+                    public boolean onCreateActionMode(ActionMode mode,Menu menu) {
                         MenuInflater inflater = mode.getMenuInflater();
                         inflater.inflate(R.menu.menu_delete, menu);
                         return true;
@@ -95,8 +86,7 @@ public class SurveysFragment extends BaseFragment {
                     }
 
                     @Override
-                    public boolean onPrepareActionMode(ActionMode mode,
-                                                       Menu menu) {
+                    public boolean onPrepareActionMode(ActionMode mode,Menu menu) {
                         return false;
                     }
                 });
@@ -108,9 +98,7 @@ public class SurveysFragment extends BaseFragment {
                 Survey survey = (Survey) mAdapter.getItem(position);
                 Bundle b = new Bundle();
                 b.putLong(DistributionDetailFragment.EXTRA_DISTRIBUTION_ID, survey.getId());
-                startActivity(new Builder(getActivity(), SurveyDistributionsFragment.class)
-                        .arguments(b).title(R.string.ab_distributions).build());
-
+                startActivity(new Builder(getActivity(), SurveyDistributionsFragment.class).arguments(b).title(R.string.ab_distributions).build());
             }
         });
 
@@ -122,7 +110,6 @@ public class SurveysFragment extends BaseFragment {
     public void onResume() {
         mAdapter.setModel(mDataManager.getSurveys());
         super.onResume();
-
     }
 
     @Override
@@ -137,17 +124,14 @@ public class SurveysFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean handled = false;
         switch (item.getItemId()) {
-
             case android.R.id.home: // Actionbar home/up icon
                 getActivity().onBackPressed();
                 break;
             case R.id.action_add: // Actionbar home/up icon
-                startActivity(new Builder(getActivity(), FormListFragment.class)
-                        .title(R.string.ab_surveys).build());
+                startActivity(new Builder(getActivity(), FormListFragment.class).title(R.string.ab_surveys).build());
                 break;
         }
         return handled;
-
     }
 
     @Override

@@ -45,12 +45,9 @@ import org.smap.surveyConverser.SurveyConverser;
 import java.util.List;
 
 
-public class DistributionDetailFragment extends BaseFragment implements
-           OnClickListener{
+public class DistributionDetailFragment extends BaseFragment implements OnClickListener{
 
-	public static final String		EXTRA_DISTRIBUTION_ID	= DistributionDetailFragment.class
-															.getCanonicalName()
-															+ "id";
+	public static final String EXTRA_DISTRIBUTION_ID	= DistributionDetailFragment.class.getCanonicalName() + "id";
     public GatewayService mService;
     public boolean mBound = false;
 
@@ -77,9 +74,7 @@ public class DistributionDetailFragment extends BaseFragment implements
     @Override
     public View onCreateContentView(LayoutInflater inflater, Bundle savedInstanceState) {
 
-		LinearLayout view = (LinearLayout) inflater.inflate(
-				R.layout.fragment_distribution_detail,
-				null);
+		LinearLayout view = (LinearLayout) inflater.inflate(R.layout.fragment_distribution_detail,null);
 
 		ViewQuery query = new ViewQuery(view);
 		mSwipeListView = (SwipeListView) query.find(R.id.list_contacts).get();
@@ -116,7 +111,14 @@ public class DistributionDetailFragment extends BaseFragment implements
         //bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
-	@Override
+    //unbind the service when stop
+    @Override
+    public void onStop() {
+        super.onStop();
+        this.getActivity().unbindService(mConnection);
+    }
+
+    @Override
 	public void onResume() {
 		super.onResume();
 
@@ -133,12 +135,10 @@ public class DistributionDetailFragment extends BaseFragment implements
 	}
 
 	private void setupContactsList() {
-		mAdapter = new DialogueAdapter(getActivity(), mModel.getDialogues(),
-				mSwipeListView);
+		mAdapter = new DialogueAdapter(getActivity(), mModel.getDialogues(),mSwipeListView);
 		mSwipeListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 
-		mSwipeListView
-				.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+		mSwipeListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
 					@Override
 					public void onItemCheckedStateChanged(ActionMode mode,
@@ -191,8 +191,6 @@ public class DistributionDetailFragment extends BaseFragment implements
 		mSwipeListView.setAdapter(mAdapter);
 
 	}
-
-
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
