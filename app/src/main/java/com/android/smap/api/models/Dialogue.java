@@ -1,5 +1,7 @@
 package com.android.smap.api.models;
 
+import android.util.Log;
+
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
@@ -8,22 +10,24 @@ import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 import com.android.smap.models.TextMessage;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Table(name = "dialogues")
 public class Dialogue extends Model {
 
     @Column(name = "distribution_id", onDelete = ForeignKeyAction.CASCADE)
-	private Distribution distribution;
+    private Distribution distribution;
 
     @Column(name = "contact_id", onDelete = ForeignKeyAction.CASCADE)
-	public Contact contact;
+    public Contact contact;
 
-	/**
-	 * Serialized JavaRosa converser
-	 */
-	@Column
-	private String serializedState;
+    /**
+     * Serialized JavaRosa converser
+     */
+    @Column
+    private String serializedState;
 
     @Column
     private String instanceXml;
@@ -34,19 +38,26 @@ public class Dialogue extends Model {
     @Column
     private int questionNumber;
 
-	// dummy fields for the moment
-	public int		answers;
-	public int		total;
-	public String	updatedAt;
+    @Column
+    private boolean submitted;
 
-	public Dialogue() {
+    @Column
+    private String startAt;
 
-	}
+    // dummy fields for the moment
+    public int answers;
+    public int total;
+    public String updatedAt;
+
+    public Dialogue() {
+
+    }
 
     public Dialogue(Distribution distribution, Contact contact) {
         this.distribution = distribution;
         this.contact = contact;
         this.completed = false;
+        this.submitted = false;
     }
 
     public void logMessage(TextMessage message) {
@@ -60,14 +71,14 @@ public class Dialogue extends Model {
         }
     }
 
-	public static Dialogue findByDistributionAndContactIds(long distributionId, long contactId) {
+    public static Dialogue findByDistributionAndContactIds(long distributionId, long contactId) {
 
-		return new Select()
-			.from(Dialogue.class)
-			.where("distribution_id = ?", distributionId)
-			.where("contact_id = ?", contactId)
-			.executeSingle();
-	}
+        return new Select()
+                .from(Dialogue.class)
+                .where("distribution_id = ?", distributionId)
+                .where("contact_id = ?", contactId)
+                .executeSingle();
+    }
 
     public List<LogMessage> getMessages() {
         return getMany(LogMessage.class, "dialogue_id");
@@ -78,6 +89,8 @@ public class Dialogue extends Model {
             completed = true;
             contact.setActiveDialogue(null);
             contact.save();
+            addTimeToAnswer();
+            Log.i("completed", this.getInstanceXml());
             save();
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,11 +98,22 @@ public class Dialogue extends Model {
 
     }
 
+    public boolean haveAnswered() {
+        if (this.instanceXml == null || this.instanceXml.equals("") || this.questionNumber <= 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public void saveData(String data, String answers, int questionNumber) {
         try {
+            if (questionNumber == 1)
+                setStartAt(new Date().toString());
+
+            setQuestionNumber(questionNumber);
             setSerializedState(data);
             setInstanceXml(answers);
-            setQuestionNumber(questionNumber);
             save();
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,6 +169,10 @@ public class Dialogue extends Model {
         return instanceXml;
     }
 
+    public void setStartAt(String startAt) {
+        this.startAt = startAt;
+    }
+
     public void setInstanceXml(String instanceXml) {
         this.instanceXml = instanceXml;
     }
@@ -159,5 +187,24 @@ public class Dialogue extends Model {
 
     public void setQuestionNumber(int questionNumber) {
         this.questionNumber = questionNumber;
+    }
+
+    public boolean isSubmitted() {
+        return submitted;
+    }
+
+    public void setSubmitted(boolean submitted) {
+        this.submitted = submitted;
+    }
+
+    public void addTimeToAnswer() {
+        String subStr1 = "<_start />";
+        String subStr2 = "<_end />";
+        String subStr3 = "<instanceID />";
+
+        this.instanceXml = this.instanceXml.replaceFirst(subStr1, "<_start>" + this.startAt + "</_start>");
+        this.instanceXml = this.instanceXml.replaceFirst(subStr2, "<_end>" + (new Date().toString()) + "</_end>");
+        this.instanceXml = this.instanceXml.replaceFirst(subStr3, "<instanceID>uuid:" + String.valueOf(UUID.randomUUID()) + "</instanceID>");
+
     }
 }

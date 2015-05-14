@@ -6,12 +6,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.smap.GatewayApp;
 import com.android.smap.R;
@@ -20,11 +20,10 @@ import com.android.smap.adapters.DistributionAdapter;
 import com.android.smap.api.models.Distribution;
 import com.android.smap.api.models.Survey;
 import com.android.smap.di.DataManager;
-import com.android.smap.ui.ViewQuery;
 import com.google.inject.Inject;
 
 public class SurveyDistributionsFragment extends BaseFragment implements
-        OnItemClickListener {
+        OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     public static final String EXTRA_SURVEY_ID = DistributionDetailFragment.class
             .getCanonicalName()
@@ -55,6 +54,7 @@ public class SurveyDistributionsFragment extends BaseFragment implements
         //mDataManager = GatewayApp.getDependencyContainer().getDataManager();
         mAdapter = new DistributionAdapter(getActivity(), mSurvey.getDistributions());
         listView.setOnItemClickListener(this);
+        listView.setOnItemLongClickListener(this);
         listView.setAdapter(mAdapter);
 
         return view;
@@ -101,4 +101,15 @@ public class SurveyDistributionsFragment extends BaseFragment implements
         return handled;
     }
 
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//        Toast.makeText(getActivity(), "longc", Toast.LENGTH_SHORT).show();
+        Distribution distribution = mAdapter.getItem(position);
+        Bundle b = new Bundle();
+        b.putLong(DistributionAnswersFragment.EXTRA_DISTRIBUTION_ID, distribution.getId());
+
+        startActivity(new Builder(getActivity(), DistributionAnswersFragment.class)
+                .arguments(b).title(R.string.ab_distribution_answers).build());
+        return true;
+    }
 }

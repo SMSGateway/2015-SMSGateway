@@ -60,7 +60,7 @@ public abstract class PojoRequestController<T> extends RequestController impleme
 
     public void validate(T response) {
         if (!ModelValidator.isModelValid(response)) {
-            onErrorResponse(new NetworkError(1));
+            onErrorResponse(new NetworkError());
             return;
         }
     }

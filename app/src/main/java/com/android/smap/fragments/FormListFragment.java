@@ -63,7 +63,7 @@ public class FormListFragment extends BaseFragment implements
 
     @Override
     public void onControllerError(NetworkError error) {
-        MWUiUtils.showMessagePopup(getActivity(), error.getNetworkErrorMessage() + " Failed to retrieve Surveys");
+        MWUiUtils.showMessagePopup(getActivity(), "" + error.getNetworkErrorCode() + " " + error.getNetworkErrorMessage() + "\n Failed to retrieve Surveys");
         showLoading(false);
 //        getActivity().onBackPressed();
     }
@@ -96,6 +96,4 @@ public class FormListFragment extends BaseFragment implements
         }
         return handled;
     }
-
-
 }

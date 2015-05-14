@@ -9,6 +9,7 @@
 
     <!-- Surveys -->
     <string name="ab_distribution_details">Distribution Details</string>
+    <string name="ab_distribution_answers">Distribution Answers</string>
     <string name="ab_distributions">Distributions</string>
     <string name="ab_surveys">Surveys</string>
     <string name="ab_create_distribution">Create Distribution</string>
@@ -26,7 +27,6 @@
 
     <!-- Settings -->
     <string name="ab_settings">Settings</string>
-
 
 
 </resources>

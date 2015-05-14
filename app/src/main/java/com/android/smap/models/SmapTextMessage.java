@@ -15,7 +15,8 @@ public class SmapTextMessage extends TextMessage{
     }
 
     public boolean isSmapMessage() {
-        return this.text.matches(smapMessageRegex);
+//        return this.text.matches(smapMessageRegex);
+        return true;
     }
 
     public boolean isCommandSMS() {

@@ -5,16 +5,16 @@ import com.android.smap.controllers.HttpErrorListener;
 import com.android.smap.controllers.HttpListener;
 import com.android.smap.utils.UriBuilder;
 
-public class FormListHttpUrlRequest extends RawHttpUrlRequest<String> {
+public class FormListRequest extends StringHttpUrlRequest {
 
-    public FormListHttpUrlRequest(HttpListener<String> httpListener, HttpErrorListener httpErrorListener) {
-        super(generateUrl(), DO_GET, true, httpListener, httpErrorListener);
+    public FormListRequest(HttpListener<String> httpListener, HttpErrorListener httpErrorListener) {
+        super(generateUrl(), DO_GET, httpListener, httpErrorListener);
     }
 
     private static String generateUrl() {
         String requestHost = GatewayApp.getPreferenceWrapper().getServerHost();
 
-        if (requestHost == null)
+        if (requestHost == null || requestHost.equals(""))
             requestHost = GatewayApp.getAppConfig().getRequestEndpoint();
 
         return new UriBuilder()
@@ -23,8 +23,4 @@ public class FormListHttpUrlRequest extends RawHttpUrlRequest<String> {
                 .appendEncodedPath(FORM_LIST).build().toString();
     }
 
-    @Override
-    public String onResultResponse(String result) {
-        return result;
-    }
 }

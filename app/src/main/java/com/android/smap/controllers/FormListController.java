@@ -12,7 +12,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import android.content.Context;
-import com.android.smap.api.requests.FormListHttpUrlRequest;
+import com.android.smap.api.requests.FormListRequest;
 import com.android.smap.api.requests.HttpUrlRequest;
 import com.android.smap.api.models.FormList;
 import com.android.smap.api.models.FormList.Form;
@@ -36,7 +36,7 @@ public class FormListController extends
 
     @Override
     protected HttpUrlRequest getHttpUrlRequest() {
-        return new FormListHttpUrlRequest(this,this);
+        return new FormListRequest(this,this);
     }
 
     @Override

@@ -31,15 +31,14 @@ public class StatusHttpUrlRequest extends HttpUrlRequest<Status> {
     protected FieldNamingPolicy mNamingPolicy = FieldNamingPolicy.IDENTITY;
 
     public StatusHttpUrlRequest(String url, String method, boolean digestAuth, HttpListener<Status> httpListener, HttpErrorListener httpErrorListener) {
-        super(generateUrl(), DO_GET, true, httpListener, httpErrorListener);
+        super(generateUrl(), DO_GET, httpListener, httpErrorListener);
     }
 
     private static String generateUrl() {
 
         return new UriBuilder()
                 .scheme(SCHEME_HTTP)
-                .encodedAuthority(
-                        GatewayApp.getAppConfig().getRequestEndpoint())
+                .encodedAuthority(GatewayApp.getAppConfig().getRequestEndpoint())
                 .appendEncodedPath(API_TOKEN).build().toString();
     }
 

@@ -6,6 +6,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -47,12 +48,21 @@ public class Distribution extends Model {
 
     public List<Dialogue> getDialogues() {
         List<Dialogue> dialogues = getMany(Dialogue.class, "distribution_id");
-        Collections.sort(dialogues,new Comparator<Dialogue>() {
+        Collections.sort(dialogues, new Comparator<Dialogue>() {
             @Override
             public int compare(Dialogue dialogue, Dialogue dialogue2) {
                 return dialogue.contact.getName().compareTo(dialogue2.contact.getName());
             }
         });
+        return dialogues;
+    }
+
+    public List<Dialogue> getAnsweredDialogues() {
+        List<Dialogue> dialogues = new ArrayList<Dialogue>();
+        for (Dialogue dialogue : getDialogues()) {
+            if (dialogue.haveAnswered())
+                dialogues.add(dialogue);
+        }
         return dialogues;
     }
 
@@ -86,12 +96,12 @@ public class Distribution extends Model {
     }
 
     public int getCompletedCount() {
-        List <Dialogue> dialogueList = getDialogues();
+        List<Dialogue> dialogueList = getDialogues();
 
         int completedCount = 0;
 
         for (Dialogue dialogue : dialogueList) {
-            if(dialogue.isCompleted())
+            if (dialogue.isCompleted())
                 completedCount++;
         }
 
@@ -117,16 +127,16 @@ public class Distribution extends Model {
 
         return ((float) totalAnswered / totalQuestion) * 100f;
      */
-     //Completion percentage of total completed
-       List <Dialogue> dialogueList = getDialogues();
+        //Completion percentage of total completed
+        List<Dialogue> dialogueList = getDialogues();
 
-       int totalComplete = 0;
-       for (Dialogue dialogue : dialogueList) {
-           if(dialogue.isCompleted())
-               totalComplete ++;
-       }
+        int totalComplete = 0;
+        for (Dialogue dialogue : dialogueList) {
+            if (dialogue.isCompleted())
+                totalComplete++;
+        }
 
-       return ((float) totalComplete / dialogueList.size()) * 100f;
+        return ((float) totalComplete / dialogueList.size()) * 100f;
 
     }
 

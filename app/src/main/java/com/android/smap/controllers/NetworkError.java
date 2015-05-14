@@ -16,6 +16,11 @@ public class NetworkError {
         networkErrorCode = 0;
     }
 
+    public NetworkError(String networkErrorMessage, int networkErrorCode) {
+        this.networkErrorMessage = networkErrorMessage;
+        this.networkErrorCode = networkErrorCode;
+    }
+
     public NetworkError(String networkErrorMessage, String networkErrorDescription, int networkErrorCode) {
         this.networkErrorMessage = networkErrorMessage;
         this.networkErrorDescription = networkErrorDescription;

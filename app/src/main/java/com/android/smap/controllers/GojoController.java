@@ -46,7 +46,7 @@ public class GojoController extends RequestController implements Controller,
 
     public void validate(Status response) {
         if (!ModelValidator.isModelValid(response)) {
-            onErrorResponse(new NetworkError(1));
+            onErrorResponse(new NetworkError());
             return;
         }
     }

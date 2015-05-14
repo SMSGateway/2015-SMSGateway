@@ -23,8 +23,7 @@ public class ServerSettingsFragment extends BaseFragment implements
     public View onCreateContentView(LayoutInflater inflater, Bundle savedInstanceState) {
 
         LinearLayout view = (LinearLayout) inflater.inflate(
-                R.layout.fragment_server_setting,
-                null);
+                R.layout.fragment_server_setting, null);
         ViewQuery query = new ViewQuery(view);
         query.find(R.id.btn_submit).onClick(this).get();
         serverHost = (EditText) query.find(R.id.txt_serverIP).get();

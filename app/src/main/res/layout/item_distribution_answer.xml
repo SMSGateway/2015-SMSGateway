@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:background="@color/smap_light_grey"
+    android:paddingBottom="12dp">
+
+    <TextView
+        android:id="@+id/txt_name"
+        style="@style/DarkGreyFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:paddingLeft="24dp"
+        android:paddingTop="10dp"
+        android:singleLine="true"
+        android:text="Name"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_name"
+        android:paddingBottom="1dp"
+        android:paddingLeft="24dp"
+        android:paddingTop="1dp"
+        android:text="0473 234 543"
+        android:textColor="@color/smap_dark_grey"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/txt_completed_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/txt_number"
+        android:layout_alignRight="@id/txt_number"
+        android:layout_alignParentRight="true"
+        android:gravity="center_horizontal"
+        android:paddingTop="1dp"
+        android:singleLine="true"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="12dp"
+        android:text="Total: 12"
+        android:textColor="@color/smap_dark_grey"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/txt_completed_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_completed_total"
+        android:layout_alignStart="@+id/txt_completed_total"
+        android:layout_alignLeft="@+id/txt_completed_total"
+        android:gravity="center"
+        android:text="Answers: 5"
+        android:singleLine="true"
+        android:textColor="@color/smap_dark_grey"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/txt_upload_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_completed_progress"
+        android:layout_alignStart="@+id/txt_completed_progress"
+        android:layout_alignLeft="@+id/txt_completed_progress"
+        android:gravity="center"
+        android:text="Upload: No"
+        android:singleLine="true"
+        android:textColor="@color/smap_dark_grey"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/txt_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/txt_number"
+        android:inputType="textCapCharacters"
+        android:paddingLeft="24dp"
+        android:text="Last Activity: 24/03, 1:00pm"
+        android:textColor="@android:color/black"
+        android:textSize="10dp" />
+
+</RelativeLayout>

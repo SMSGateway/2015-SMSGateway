@@ -2,6 +2,8 @@ package com.android.smap.api.services;
 
 
 import android.content.res.Resources;
+import android.util.Log;
+
 import com.android.smap.R;
 import com.android.smap.GatewayApp;
 import com.android.smap.api.models.Dialogue;
@@ -37,8 +39,8 @@ public class SmsDialogueHandler implements DialogueHandler {
     }
 
     @Override
-    public void saveData(String data, String answers,int questionNumber) {
-        dialogue.saveData(data, answers,questionNumber);
+    public void saveData(String data, String answers, int questionNumber) {
+        dialogue.saveData(data, answers, questionNumber);
     }
 
     @Override
@@ -56,7 +58,7 @@ public class SmsDialogueHandler implements DialogueHandler {
     @Override
     public void handleComplete() {
         dialogue.markAsComplete();
-        TextMessage replyMessage = new TextMessage(dialogue.getPhoneNumber(),resource.getString(R.string.survey_complete));
+        TextMessage replyMessage = new TextMessage(dialogue.getPhoneNumber(), resource.getString(R.string.survey_complete));
         dialogue.logMessage(replyMessage);
         sender.sendMessage(replyMessage);
     }

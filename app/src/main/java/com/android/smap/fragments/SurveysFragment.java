@@ -138,7 +138,7 @@ public class SurveysFragment extends BaseFragment {
         switch (item.getItemId()) {
 
             case android.R.id.home: // Actionbar home/up icon
-                getActivity().onBackPressed();
+               // getActivity().onBackPressed();
                 break;
             case R.id.action_add: // Actionbar home/up icon
                 startActivity(new Builder(getActivity(), FormListFragment.class)

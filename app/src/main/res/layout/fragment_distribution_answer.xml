@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/smap_dark_grey"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_distribution_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="12dp"
+        android:text="Distribution Name"
+        android:textColor="@color/smap_cream"
+        android:background="@color/smap_dark_grey"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:singleLine="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/smap_blue"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_upload"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:background="@drawable/upload"
+            android:layout_marginLeft="2dp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_dialogues"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/smap_med_grey"
+        android:divider="@color/smap_dark_grey"
+        android:dividerHeight="1dp" />
+
+</LinearLayout>

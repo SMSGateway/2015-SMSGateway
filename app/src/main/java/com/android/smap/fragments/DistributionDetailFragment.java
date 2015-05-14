@@ -18,7 +18,6 @@ import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.smap.GatewayApp;
 import com.android.smap.R;
@@ -119,7 +118,6 @@ public class DistributionDetailFragment extends BaseFragment implements
     @Override
     public void onResume() {
         super.onResume();
-
         mModel = mDataManager.getDistribution(mDistributionId);
         // TODO get this from distribution
         mAdapter.setModel(mModel.getDialogues());

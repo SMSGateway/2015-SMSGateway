@@ -1,7 +1,5 @@
 package com.android.smap.utils;
 
-import android.util.Log;
-
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
@@ -16,12 +14,12 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 /**
- * This class is used to deal with digest authentication for a connection
- * <p/>
+ * This class is used to deal with digest authentication for a connection.
+ *
  * Created by kai on 30/04/2015.
  */
 public class HttpURLDigestAuth {
-    public HttpURLConnection tryAuth(HttpURLConnection connection, String username, String password)
+    public static HttpURLConnection tryAuth(HttpURLConnection connection, String username, String password)
             throws IOException {
         int responseCode = connection.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
@@ -37,7 +35,6 @@ public class HttpURLDigestAuth {
         String base = input.getURL().getProtocol() + "://" + input.getURL().getHost() + ":" + input.getURL().getPort();
         String path = input.getURL().toString().substring(base.length());
         String auth = input.getHeaderField("WWW-Authenticate");
-        Log.d("auth", "auth: " + auth);
 
         if (auth == null || !auth.startsWith("Digest ")) {
             final HttpURLConnection result;
@@ -105,7 +102,6 @@ public class HttpURLDigestAuth {
         try {
             final HttpURLConnection result = (HttpURLConnection) input.getURL().openConnection();
             result.addRequestProperty("Authorization", sb.toString());
-            Log.d("sb.toString()", sb.toString());
             return result;
         } catch (IOException e) {
             return null;

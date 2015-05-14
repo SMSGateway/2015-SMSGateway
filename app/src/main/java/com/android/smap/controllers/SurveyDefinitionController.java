@@ -5,7 +5,7 @@ import org.smap.surveyModel.SurveyModel;
 import android.content.Context;
 
 import com.android.smap.api.requests.HttpUrlRequest;
-import com.android.smap.api.requests.SurveyDefinitionHttpUrlRequest;
+import com.android.smap.api.requests.SurveyDefinitionRequest;
 import com.android.smap.api.models.Survey;
 
 public class SurveyDefinitionController extends
@@ -30,7 +30,7 @@ public class SurveyDefinitionController extends
 
     @Override
     protected HttpUrlRequest getHttpUrlRequest() {
-        return new SurveyDefinitionHttpUrlRequest(mFormUrl, this, this);
+        return new SurveyDefinitionRequest(mFormUrl, this, this);
     }
 
     @Override
