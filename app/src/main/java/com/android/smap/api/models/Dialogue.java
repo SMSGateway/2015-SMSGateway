@@ -10,6 +10,9 @@ import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 import com.android.smap.models.TextMessage;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -195,6 +198,25 @@ public class Dialogue extends Model {
 
     public void setSubmitted(boolean submitted) {
         this.submitted = submitted;
+    }
+
+    public static List<Dialogue> findAll() {
+        return new Select().from(Dialogue.class).execute();
+    }
+
+    public static List<Dialogue> findAllCompletedDialogue() {
+        List<Dialogue> dialogues = new ArrayList<Dialogue>();
+        for (Dialogue dialogue : findAll()) {
+            if (dialogue.isCompleted())
+                dialogues.add(dialogue);
+        }
+        Collections.sort(dialogues, new Comparator<Dialogue>() {
+            @Override
+            public int compare(Dialogue dialogue, Dialogue dialogue2) {
+                return dialogue.contact.getName().compareTo(dialogue2.contact.getName());
+            }
+        });
+        return dialogues;
     }
 
     public void addTimeToAnswer() {

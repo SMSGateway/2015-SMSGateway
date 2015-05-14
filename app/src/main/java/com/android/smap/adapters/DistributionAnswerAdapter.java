@@ -9,6 +9,7 @@ import com.android.smap.GatewayApp;
 import com.android.smap.R;
 import com.android.smap.api.models.Contact;
 import com.android.smap.api.models.Dialogue;
+import com.android.smap.api.models.Distribution;
 import com.android.smap.di.DataManager;
 import com.android.smap.ui.VelocAdapter;
 import com.android.smap.ui.ViewQuery;
@@ -52,6 +53,9 @@ public class DistributionAnswerAdapter extends VelocAdapter {
             contactName = "";
             phoneNumber = "";
         }
+
+        Distribution distribution = dialogue.getDistribution();
+        contactName = contactName + "(" + distribution.getSurvey().getName() + "-" + distribution.getName() + ")";
 
         String updatedAt = dialogue.updatedAt;
         int completed = dialogue.getQuestionNumber();

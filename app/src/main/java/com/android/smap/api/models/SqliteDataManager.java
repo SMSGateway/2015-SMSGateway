@@ -15,29 +15,33 @@ import com.android.smap.utils.XmlContent;
 
 public class SqliteDataManager implements DataManager {
 
-	public SqliteDataManager() {
+    public SqliteDataManager() {
 
-		if (getSurveys().isEmpty()) {
-			seedDevData();
-		}
-	}
+        if (getSurveys().isEmpty()) {
+            seedDevData();
+        }
+    }
 
-	@Override
-	public List<Survey> getSurveys() {
+    @Override
+    public List<Survey> getSurveys() {
 
-		return Survey.findAll();
-	}
+        return Survey.findAll();
+    }
 
     @Override
     public List<Distribution> getDistributions() {
         return Distribution.findAll();
     }
 
-	@Override
-	public Survey getSurvey(long id) {
+    public List<Dialogue> getDialogues() {
+        return Dialogue.findAll();
+    }
 
-		return Survey.findById((long) id);
-	}
+    @Override
+    public Survey getSurvey(long id) {
+
+        return Survey.findById((long) id);
+    }
 
     @Override
     public Distribution getDistribution(long id) {
@@ -45,46 +49,46 @@ public class SqliteDataManager implements DataManager {
         return Distribution.findById((long) id);
     }
 
-	@Override
-	public void deleteSurveys(List<Survey> surveys) {
-		
-		for (Survey survey : surveys) {
-			
-			if(survey != null) {
-				survey.delete();
-			}
-		}
-	}
-	
-	@Override
-	public void deleteSurvey(Survey survey) {
-		
-		if(survey != null) {
-			survey.delete();
-		}
-	}
+    @Override
+    public void deleteSurveys(List<Survey> surveys) {
 
-	@Override
-	public List<Contact> getContacts() {
+        for (Survey survey : surveys) {
 
-		return Contact.findAll();
-	}
+            if (survey != null) {
+                survey.delete();
+            }
+        }
+    }
 
-	@Override
-	public void addContactsToDistribution(List<Contact> contacts, Distribution distribution) {
+    @Override
+    public void deleteSurvey(Survey survey) {
+
+        if (survey != null) {
+            survey.delete();
+        }
+    }
+
+    @Override
+    public List<Contact> getContacts() {
+
+        return Contact.findAll();
+    }
+
+    @Override
+    public void addContactsToDistribution(List<Contact> contacts, Distribution distribution) {
         distribution.addDialogues(contacts);
-	}
+    }
 
-	@Override
-	public void removeContactFromDistribution(long contactId, long distributionId) {
+    @Override
+    public void removeContactFromDistribution(long contactId, long distributionId) {
 
-		Dialogue dialogue = Dialogue.findByDistributionAndContactIds(
+        Dialogue dialogue = Dialogue.findByDistributionAndContactIds(
                 distributionId, contactId);
 
-		if (dialogue != null) {
-			dialogue.delete();
-		}
-	}
+        if (dialogue != null) {
+            dialogue.delete();
+        }
+    }
 
     @Override
     public Contact findContactByPhoneNumber(String phoneNumber) {
@@ -93,51 +97,51 @@ public class SqliteDataManager implements DataManager {
 
     private void seedDevData() {
 
-		ActiveAndroid.beginTransaction();
+        ActiveAndroid.beginTransaction();
 
-		try {
-			
-			Survey birdsSurvey = new Survey("Birds", XmlContent.xmlContent);
+        try {
+
+            Survey birdsSurvey = new Survey("Birds", XmlContent.xmlContent);
             birdsSurvey.save();
             Distribution summerBirds = birdsSurvey.createDistribution("Summer Birds");
 
-			Survey householdSurvey = new Survey("Household Survey", XmlContent.xmlContent);
+            Survey householdSurvey = new Survey("Household Survey", XmlContent.xmlContent);
             householdSurvey.save();
             Distribution householdDist = householdSurvey.createDistribution("Main Distribution");
 
-			for (int n : IntRange.between(1, 10)) {
-				Contact contact = new Contact("Contact " + n, "5556");
-				contact.save();
-				
-				Distribution survey = (n % 2 == 0) ? summerBirds: householdDist;
-				survey.addDialogue(contact);
-			}
+            for (int n : IntRange.between(1, 10)) {
+                Contact contact = new Contact("Contact " + n, "5556");
+                contact.save();
 
-			ActiveAndroid.setTransactionSuccessful();
-			
-		} finally {
+                Distribution survey = (n % 2 == 0) ? summerBirds : householdDist;
+                survey.addDialogue(contact);
+            }
 
-			ActiveAndroid.endTransaction();
-		}
-	}
-	
-	public static String convertStreamToString(InputStream is) throws Exception {
-	    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-	    StringBuilder sb = new StringBuilder();
-	    String line = null;
-	    while ((line = reader.readLine()) != null) {
-	      sb.append(line).append("\n");
-	    }
-	    reader.close();
-	    return sb.toString();
-	}
+            ActiveAndroid.setTransactionSuccessful();
 
-	public static String getStringFromFile (String filePath) throws Exception {
-	    File fl = new File(filePath);
-	    FileInputStream fin = new FileInputStream(fl);
-	    String ret = convertStreamToString(fin);
-	    //Make sure you close all streams.
-	    fin.close();        
-	    return ret;
-	}
+        } finally {
+
+            ActiveAndroid.endTransaction();
+        }
+    }
+
+    public static String convertStreamToString(InputStream is) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line).append("\n");
+        }
+        reader.close();
+        return sb.toString();
+    }
+
+    public static String getStringFromFile(String filePath) throws Exception {
+        File fl = new File(filePath);
+        FileInputStream fin = new FileInputStream(fl);
+        String ret = convertStreamToString(fin);
+        //Make sure you close all streams.
+        fin.close();
+        return ret;
+    }
 }

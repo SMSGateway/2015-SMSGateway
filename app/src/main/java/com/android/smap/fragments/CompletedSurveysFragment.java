@@ -2,7 +2,6 @@ package com.android.smap.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,58 +28,42 @@ import com.android.smap.ui.ViewQuery;
 import com.android.smap.utils.MWUiUtils;
 import com.google.inject.Inject;
 
-
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.List;
 
 /**
+ * show Completed Surveys and upload
+ * <p/>
  * Created by kai on 13/05/2015.
  */
-public class DistributionAnswersFragment extends BaseFragment implements
-        AdapterView.OnItemClickListener,
+public class CompletedSurveysFragment extends BaseFragment implements
         ControllerListener,
-        ControllerErrorListener,
-        View.OnClickListener {
+        ControllerErrorListener {
 
-    public static final String EXTRA_DISTRIBUTION_ID = DistributionAnswersFragment.class
+    public static final String EXTRA_DISTRIBUTION_ID = CompletedSurveysFragment.class
             .getCanonicalName() + "id";
 
     @Inject
-    private DataManager mDataManager;
-    private Distribution mModel;
+    private List<Dialogue> dialogues;
     private DistributionAnswerAdapter mAdapter;
-    private int mDistributionId;
     private ListView listView;
     private UploadSurveyController mController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle b = getArguments();
-        if (b != null) {
-            mDistributionId = (int) b.getLong(EXTRA_DISTRIBUTION_ID);
-        }
-        // get all necessary local data
-        mDataManager = GatewayApp.getDependencyContainer().getDataManager();
-        mModel = mDataManager.getDistribution(mDistributionId);
+        dialogues = Dialogue.findAllCompletedDialogue();
     }
 
     @Override
     public View onCreateContentView(LayoutInflater inflater, Bundle savedInstanceState) {
         LinearLayout view = (LinearLayout) inflater.inflate(
-                R.layout.fragment_distribution_answer, null);
+                R.layout.fragment_complete_surveys, null);
 
         ViewQuery query = new ViewQuery(view);
 
         listView = (ListView) query.find(R.id.list_dialogues).get();
-        setupDialoguesList();
-
-        mController = new UploadSurveyController(getActivity(), this, this);
-        TextView textView = (TextView) view.findViewById(R.id.txt_distribution_name);
-        textView.setText(mModel.getName());
-
-        query.find(R.id.btn_upload).onClick(this).get();
+        setupDialoguesViewList();
 
         return view;
     }
@@ -88,23 +71,19 @@ public class DistributionAnswersFragment extends BaseFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        mModel = mDataManager.getDistribution(mDistributionId);
-        mAdapter.setModel(mModel.getAnsweredDialogues());
+        dialogues = Dialogue.findAllCompletedDialogue();
+        mAdapter.setModel(dialogues);
     }
 
-    private void setupDialoguesList() {
-        mAdapter = new DistributionAnswerAdapter(getActivity(), mModel.getAnsweredDialogues());
+    private void setupDialoguesViewList() {
+        mAdapter = new DistributionAnswerAdapter(getActivity(), dialogues);
         listView.setAdapter(mAdapter);
     }
 
-    @Override
-    public void onClick(View v) {
-        // each dialogue in distribution
-        List<Dialogue> dialogues = mModel.getAnsweredDialogues();
-
-        if (dialogues.isEmpty()) {
+    public void uploadCompletedSurveys() {
+        if (dialogues == null || dialogues.isEmpty()) {
             Toast.makeText(getActivity(), "Nothing to upload.", Toast.LENGTH_SHORT).show();
-//            return;
+            return;
         }
 
         String answers;
@@ -113,8 +92,10 @@ public class DistributionAnswersFragment extends BaseFragment implements
 
         for (Dialogue dialogue : dialogues) {
             answers = dialogue.getInstanceXml();
+            Log.i("answers", answers);
             filePart = new FilePart(new ByteArrayInputStream(answers.getBytes()), "survey.xml");
 
+            mController = new UploadSurveyController(getActivity(), this, this);
             mController.cleanFileParts();
             mController.addFilePart(filePart);
             mController.start();
@@ -128,13 +109,12 @@ public class DistributionAnswersFragment extends BaseFragment implements
     @Override
     public void onControllerError(NetworkError error) {
         int errorCode = error.getNetworkErrorCode();
-        String hint;
         if (errorCode >= 400)
-            hint = "" + error.getNetworkErrorCode() + " " + error.getNetworkErrorMessage() + "\n Failed to upload Surveys";
+            MWUiUtils.showMessagePopup(getActivity(), "Error:" + error.getNetworkErrorCode() + " "
+                    + error.getNetworkErrorMessage() + "\n Failed to upload Surveys");
         else
-            hint = error.getNetworkErrorMessage() + "\n Failed to upload Surveys";
+            MWUiUtils.showMessagePopup(getActivity(), error.getNetworkErrorMessage() + "\n Failed to upload Surveys");
 
-        MWUiUtils.showMessagePopup(getActivity(), hint);
         showLoading(false);
     }
 
@@ -142,22 +122,27 @@ public class DistributionAnswersFragment extends BaseFragment implements
     public void onControllerResult() {
         showLoading(false);
         Toast.makeText(getActivity(), "Upload successfully.", Toast.LENGTH_SHORT).show();
-        mModel = mDataManager.getDistribution(mDistributionId);
-        mAdapter.setModel(mModel.getAnsweredDialogues());
-
+        dialogues = Dialogue.findAllCompletedDialogue();
+        mAdapter.setModel(dialogues);
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_complete_survey, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        boolean handled = true;
+        boolean handled = false;
         switch (item.getItemId()) {
+
             case android.R.id.home: // Actionbar home/up icon
                 getActivity().onBackPressed();
+                break;
+            case R.id.action_upload:
+                uploadCompletedSurveys();
                 break;
         }
         return handled;

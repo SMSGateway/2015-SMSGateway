@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.smap.MainActivity">
+
+    <item
+        android:id="@+id/action_add"
+        android:icon="@drawable/refrensh"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Add" />
+
+    <item
+        android:id="@+id/action_view_complete_survey"
+        android:icon="@drawable/view"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:title="view complete survey" />
+
+</menu>

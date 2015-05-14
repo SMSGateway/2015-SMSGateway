@@ -204,6 +204,7 @@ public abstract class HttpUrlRequest<T> implements ApiConstants {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         Log.i("request url", " " + conn.getURL().toString());
+
         if (isDigestAuth()) {
             finalConn = HttpURLDigestAuth.tryAuth(conn, username, password);
         } else

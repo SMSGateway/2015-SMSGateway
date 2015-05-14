@@ -35,12 +35,15 @@ public class SurveyDefinitionController extends
 
     @Override
     protected Survey addResponseToDatabase(String rawXML) {
-
         Survey survey = new Survey();
-        SurveyModel SurveyManager = SurveyModel.createSurveyModelFromXform(rawXML);
-        survey.setName(SurveyManager.getSurveyName());
-        survey.setFormXml(rawXML);
-        survey.save();
+
+        if ((Survey.findByFormXml(rawXML)).isEmpty()) {
+            SurveyModel SurveyManager = SurveyModel.createSurveyModelFromXform(rawXML);
+            survey.setName(SurveyManager.getSurveyName());
+            survey.setFormXml(rawXML);
+            survey.save();
+        }
+
         return survey;
     }
 }

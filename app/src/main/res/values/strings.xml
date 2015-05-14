@@ -12,6 +12,7 @@
     <string name="ab_distribution_answers">Distribution Answers</string>
     <string name="ab_distributions">Distributions</string>
     <string name="ab_surveys">Surveys</string>
+    <string name="ab_complete_surveys">Completed Surveys</string>
     <string name="ab_create_distribution">Create Distribution</string>
     <string name="surveys_subtitle">Local Survey Templates</string>
     <string name="surveys_of_total">OF %1$d</string>

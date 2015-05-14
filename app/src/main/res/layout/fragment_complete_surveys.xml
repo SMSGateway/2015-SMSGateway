@@ -6,33 +6,18 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/txt_distribution_name"
+        android:id="@+id/txt_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="6dp"
         android:paddingBottom="6dp"
         android:paddingLeft="12dp"
-        android:text="Distribution Name"
+        android:text="Upload View"
         android:textColor="@color/smap_cream"
-        android:background="@color/smap_dark_grey"
+        android:background="@color/smap_blue"
         android:textSize="22sp"
         android:textStyle="bold"
         android:singleLine="false" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/smap_blue"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_upload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/upload_icn"
-            android:layout_marginLeft="2dp"
-            android:hint="upload"/>
-    </LinearLayout>
 
     <ListView
         android:id="@+id/list_dialogues"

@@ -36,8 +36,7 @@ public class FormListFragment extends BaseFragment implements
     public View onCreateContentView(LayoutInflater inflater, Bundle savedInstanceState) {
 
         LinearLayout view = (LinearLayout) inflater.inflate(
-                R.layout.fragment_form_list,
-                null);
+                R.layout.fragment_form_list, null);
 
         ListView listView = (ListView) view.findViewById(R.id.list_surveys);
         mDataManager = GatewayApp.getDependencyContainer().getDataManager();
@@ -63,9 +62,15 @@ public class FormListFragment extends BaseFragment implements
 
     @Override
     public void onControllerError(NetworkError error) {
-        MWUiUtils.showMessagePopup(getActivity(), "" + error.getNetworkErrorCode() + " " + error.getNetworkErrorMessage() + "\n Failed to retrieve Surveys");
+        int errorCode = error.getNetworkErrorCode();
+        String hint;
+        if (errorCode >= 400)
+            hint = "" + error.getNetworkErrorCode() + " " + error.getNetworkErrorMessage() + "\n Failed to retrieve Surveys";
+        else
+            hint = error.getNetworkErrorMessage() + "\n Failed to retrieve Surveys";
+
+        MWUiUtils.showMessagePopup(getActivity(), hint);
         showLoading(false);
-//        getActivity().onBackPressed();
     }
 
     @Override

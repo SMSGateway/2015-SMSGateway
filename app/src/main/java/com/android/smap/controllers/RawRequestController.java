@@ -48,7 +48,6 @@ public abstract class RawRequestController<T extends Model> extends RequestContr
         T model = null;
         ActiveAndroid.beginTransaction();
         try {
-
             model = addResponseToDatabase(response);
             ActiveAndroid.setTransactionSuccessful();
             setModel(model);
