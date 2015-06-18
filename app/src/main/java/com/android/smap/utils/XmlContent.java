@@ -1,7 +1,5 @@
 package com.android.smap.utils;
 
-import java.io.InputStream;
-
 /**
  * Created by kai on 5/04/2015.
  */
@@ -69,7 +67,6 @@ public class XmlContent {
             "    </input>\n" +
             "  </h:body>\n" +
             "</h:html>\n";
-    public static InputStream xmlInStream;
 
     public XmlContent() {
     }

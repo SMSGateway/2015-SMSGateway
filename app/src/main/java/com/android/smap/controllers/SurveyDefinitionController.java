@@ -4,6 +4,7 @@ import org.smap.surveyModel.SurveyModel;
 
 import android.content.Context;
 
+import com.android.smap.GatewayApp;
 import com.android.smap.api.requests.HttpUrlRequest;
 import com.android.smap.api.requests.SurveyDefinitionRequest;
 import com.android.smap.api.models.Survey;
@@ -27,7 +28,6 @@ public class SurveyDefinitionController extends
         this.mFormUrl = formKey;
     }
 
-
     @Override
     protected HttpUrlRequest getHttpUrlRequest() {
         return new SurveyDefinitionRequest(mFormUrl, this, this);
@@ -36,6 +36,7 @@ public class SurveyDefinitionController extends
     @Override
     protected Survey addResponseToDatabase(String rawXML) {
         Survey survey = new Survey();
+        GatewayApp.getNewSurveys().add(rawXML);
 
         if ((Survey.findByFormXml(rawXML)).isEmpty()) {
             SurveyModel SurveyManager = SurveyModel.createSurveyModelFromXform(rawXML);

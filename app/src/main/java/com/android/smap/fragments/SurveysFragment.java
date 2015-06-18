@@ -189,6 +189,17 @@ public class SurveysFragment extends BaseFragment implements
 
     @Override
     public void onControllerResult() {
+
+    //each form has been downloaded
+    if(GatewayApp.getNewSurveys().size() == forms.size())
+    {
+        for(Survey survey: mDataManager.getSurveys()){
+
+         if(!GatewayApp.getNewSurveys().contains(survey.getFormXml())){
+           survey.delete();
+          }
+        }
+    }
         mAdapter.setModel(mDataManager.getSurveys());
 //        Toast.makeText(getActivity(), "One survey is retrieved.", Toast.LENGTH_SHORT).show();
     }
@@ -198,6 +209,7 @@ public class SurveysFragment extends BaseFragment implements
         mController = new FormListController(getActivity(), new ControllerListener() {
             @Override
             public void onControllerResult() {
+                GatewayApp.getNewSurveys().clear();
                 fetchEachSurvey();
             }
         }, this);

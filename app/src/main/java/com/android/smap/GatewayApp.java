@@ -7,6 +7,9 @@ import com.android.smap.utils.PreferenceWrapper;
 
 import org.apache.http.Header;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The main {@link Application} class. Singleton that provides access to main
  * utilities and global components.
@@ -17,6 +20,7 @@ public class GatewayApp extends Application {
 
     private static GatewayApp sInstance;
     private static AppConfig sAppConfig;
+    private static List<String> newSurveys;
     private static PreferenceWrapper sPreferenceWrapper;
     private static PhoneStateWrapper sPhoneStateWrapper;
     private static DependencyContainer sDependencyContainer;
@@ -26,6 +30,7 @@ public class GatewayApp extends Application {
         super.onCreate();
         sInstance = GatewayApp.this;
         sAppConfig = new AppConfig(this);
+        newSurveys = new ArrayList<String>();
         sPreferenceWrapper = new PreferenceWrapper(this);
         sPhoneStateWrapper = new PhoneStateWrapper(this);
         sDependencyContainer = new DependencyContainer();
@@ -78,4 +83,11 @@ public class GatewayApp extends Application {
         return sDependencyContainer;
     }
 
+    public static List<String> getNewSurveys() {
+        return newSurveys;
+    }
+
+    public static void setNewSurveys(List<String> newSurveys) {
+        GatewayApp.newSurveys = newSurveys;
+    }
 }

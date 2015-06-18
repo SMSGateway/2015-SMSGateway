@@ -6,6 +6,7 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 import org.smap.surveyConverser.SurveyConverser;
@@ -95,6 +96,10 @@ public class Survey extends Model {
 
     public static Survey findById(Long id) {
         return Model.load(Survey.class, id);
+    }
+
+    public static void deleteAll() {
+       new Delete().from(Survey.class).execute();
     }
 
     public static List<Survey> findByFormXml(String formXml) {

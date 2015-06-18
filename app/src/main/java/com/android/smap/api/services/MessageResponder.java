@@ -31,7 +31,8 @@ public class MessageResponder {
     }
 
     public void handleMessage(MessageSender sender, SmapTextMessage message) {
-        Contact contact = dataManager.findContactByPhoneNumber(message.getPhoneNumber().substring(7));
+        Contact contact = dataManager.findContactByPhoneNumber(message.getPhoneNumber());
+//        Contact contact = dataManager.findContactByPhoneNumber(message.getPhoneNumber().substring(7));
 
         if (contact == null) {
             Log.e(TAG, "Contact Not A Smap Contact : "+message.getPhoneNumber());
